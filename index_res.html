@@ -1,0 +1,2716 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoastSelect — Specialty Koffiebonen van Onafhankelijke Branderijen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g900:#1a2e1a;--g800:#1e3a1e;--g700:#2c5f2e;--g600:#3a7d3c;--g500:#4a9e4c;
+  --g100:#e8f5e9;--g50:#f1faf2;
+  --gold:#c9963a;--gold-l:#f9f0de;--gold-d:#9a7020;
+  --cream:#faf8f4;--cream-d:#f2ede4;
+  --txt:#1a1a1a;--mid:#444;--muted:#777;
+  --border:#e0d8cc;--border-m:#c8bfb0;
+  --sh-sm:0 1px 4px rgba(0,0,0,.06);
+  --sh-md:0 4px 20px rgba(0,0,0,.10);
+  --sh-lg:0 16px 56px rgba(0,0,0,.16);
+  --r:12px;--r-lg:20px;
+  --ff-d:'Playfair Display',Georgia,serif;
+  --ff-b:'DM Sans',system-ui,sans-serif;
+  --ff-m:'DM Mono',monospace;
+  --nav-h:64px;
+
+  /* ── Herkomst-achtergrondkleuren (Roast Standard Beeldstandaard) ── */
+  --bg-oost-afrika:#C9724A;   /* Terracotta Warm – Ethiopië, Kenia, Rwanda */
+  --bg-centraal-afr:#C9A84C;  /* Savanne Goud – Tanzania, Uganda, Congo */
+  --bg-arabisch:#9B9BC9;      /* Indigo Zacht – Jemen, Indonesië, India */
+  --bg-centraal-am:#6BAA78;   /* Jade Groen – Guatemala, Honduras, El Salvador */
+  --bg-zuid-am:#A0744E;       /* Cacao Naturel – Colombia, Brazilië, Peru */
+  --bg-pacific:#7ABFBF;       /* Koraal Aqua – Papua, Hawaï */
+  --bg-blend:#8A9BA8;         /* Leisteen Grijs – Blends */
+  --bg-limited:#6B3A2A;       /* Donker Mahonie – Seizoensedities */
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-b);background:var(--cream);color:var(--txt);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-track{background:var(--cream-d)}
+::-webkit-scrollbar-thumb{background:var(--g600);border-radius:4px}
+
+/* ── LAYOUT ── */
+.container{max-width:1300px;margin:0 auto;padding:0 24px}
+
+/* ─────────────── NAVIGATION ─────────────── */
+.nav{position:sticky;top:0;z-index:200;background:var(--g900);height:var(--nav-h);
+  display:flex;align-items:center;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.nav-inner{display:flex;align-items:center;width:100%;max-width:1300px;margin:0 auto;padding:0 24px;gap:0}
+.nav-logo{flex-shrink:0;display:flex;align-items:center;line-height:1}
+.nav-logo svg{height:80px;width:auto;display:block}
+.nav-search{flex:1;max-width:540px;margin:0 24px;position:relative}
+.nav-search input{width:100%;height:42px;border-radius:10px;border:2px solid transparent;
+  background:rgba(255,255,255,.1);color:#fff;padding:0 46px 0 16px;
+  font-family:var(--ff-b);font-size:14px;outline:none;transition:.2s}
+.nav-search input::placeholder{color:rgba(255,255,255,.45)}
+.nav-search input:focus{background:rgba(255,255,255,.15);border-color:var(--gold)}
+.nav-search-btn{position:absolute;right:5px;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;border-radius:8px;background:var(--gold);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav-link{color:rgba(255,255,255,.8);font-size:13px;font-weight:500;padding:8px 11px;
+  border-radius:8px;transition:.18s;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.nav-link:hover,.nav-link.active{color:#fff;background:rgba(255,255,255,.1)}
+.nav-actions{display:flex;align-items:center;gap:8px;margin-left:10px}
+.btn-nav{height:38px;padding:0 15px;border-radius:9px;font-size:13px;font-weight:600;
+  display:flex;align-items:center;gap:6px;transition:.18s}
+.btn-nav-ghost{border:1.5px solid rgba(255,255,255,.28);color:#fff}
+.btn-nav-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-nav-cta{background:var(--gold);color:#fff}
+.btn-nav-cta:hover{background:#b8852e}
+.badge{background:var(--g600);color:#fff;font-size:10px;font-weight:700;
+  padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
+
+/* ── CATEGORY BAR ── */
+.cat-bar{background:var(--g800);border-bottom:1px solid rgba(255,255,255,.05)}
+.cat-inner{display:flex;align-items:center;gap:0;max-width:1300px;margin:0 auto;
+  padding:0 24px;overflow-x:auto;scrollbar-width:none}
+.cat-inner::-webkit-scrollbar{display:none}
+.cat-item{flex-shrink:0;color:rgba(255,255,255,.68);font-size:12.5px;font-weight:500;
+  padding:10px 13px;border-bottom:2px solid transparent;transition:.18s;
+  white-space:nowrap;display:flex;align-items:center;gap:5px}
+.cat-item:hover{color:#fff;border-bottom-color:rgba(255,255,255,.25)}
+.cat-item.active{color:#fff;border-bottom-color:var(--gold)}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:480px;display:flex;align-items:center;overflow:hidden;
+  background:linear-gradient(140deg,var(--g900) 0%,#253d1c 55%,#33601e 100%)}
+.hero-noise{position:absolute;inset:0;opacity:.12;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 400px;
+  gap:52px;align-items:center;max-width:1300px;margin:0 auto;padding:60px 24px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,150,58,.14);border:1px solid rgba(201,150,58,.28);
+  color:var(--gold);font-size:11.5px;font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;padding:5px 13px;border-radius:20px;margin-bottom:18px}
+.hero-title{font-family:var(--ff-d);font-size:clamp(30px,3.8vw,50px);font-weight:700;
+  color:#fff;line-height:1.13;margin-bottom:14px}
+.hero-title em{color:var(--gold);font-style:normal}
+.hero-sub{color:rgba(255,255,255,.72);font-size:16.5px;line-height:1.65;margin-bottom:26px;max-width:470px}
+.btn{display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 22px;
+  border-radius:12px;font-size:14.5px;font-weight:600;transition:.22s;cursor:pointer;font-family:var(--ff-b)}
+.btn-gold{background:var(--gold);color:#fff;box-shadow:0 4px 18px rgba(201,150,58,.32)}
+.btn-gold:hover{background:#b8852e;transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{background:rgba(255,255,255,.18)}
+.hero-trust{display:flex;align-items:center;gap:18px;margin-top:26px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.6);font-size:12.5px}
+
+/* Hero featured card */
+.hero-card{background:rgba(255,255,255,.07);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.11);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.hero-card-hdr{color:rgba(255,255,255,.5);font-size:10.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;margin-bottom:2px}
+.feat-item{display:flex;align-items:center;gap:12px;padding:11px;
+  border-radius:11px;border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.05);cursor:pointer;transition:.18s}
+.feat-item:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.12)}
+.feat-thumb{width:50px;height:50px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;flex-shrink:0;position:relative;overflow:hidden}
+.feat-thumb-img{position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font-size:22px}
+.feat-info{flex:1;min-width:0}
+.feat-name{color:#fff;font-weight:600;font-size:13.5px;line-height:1.3;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feat-brand{color:rgba(255,255,255,.46);font-size:11px;margin-top:1px}
+.feat-price{color:var(--gold);font-weight:700;font-size:14.5px;flex-shrink:0;margin-left:4px}
+
+/* ── USP STRIP ── */
+.usp-strip{background:var(--gold-l);border-top:1px solid #e8d49a;border-bottom:1px solid #e8d49a}
+.usp-inner{display:flex;justify-content:space-around;align-items:center;
+  max-width:1300px;margin:0 auto;padding:12px 24px;gap:10px;flex-wrap:wrap}
+.usp-item{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:500;color:var(--mid)}
+.usp-item strong{color:var(--g700)}
+
+/* ── PAGE LAYOUT ── */
+.page-layout{display:grid;grid-template-columns:268px 1fr;gap:28px;
+  max-width:1300px;margin:0 auto;padding:28px 24px;align-items:start}
+
+/* ── FILTERS ── */
+.filters{position:sticky;top:calc(var(--nav-h)+14px);background:#fff;
+  border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;box-shadow:var(--sh-sm)}
+.f-head{background:var(--g900);padding:15px 18px;display:flex;align-items:center;justify-content:space-between}
+.f-head-title{color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;gap:7px}
+.f-reset{color:rgba(255,255,255,.55);font-size:11.5px;font-weight:500;padding:3px 9px;
+  border-radius:5px;background:rgba(255,255,255,.09);cursor:pointer;transition:.18s}
+.f-reset:hover{color:#fff;background:rgba(255,255,255,.18)}
+.f-group{border-bottom:1px solid var(--border);padding:14px 18px}
+.f-group:last-child{border-bottom:none}
+.f-group-hdr{display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;user-select:none;margin-bottom:11px}
+.f-label{font-size:12.5px;font-weight:700;color:var(--txt);letter-spacing:.02em}
+.f-caret{font-size:14px;color:var(--muted)}
+
+/* Color-coded region filter pills */
+.region-pills{display:flex;flex-direction:column;gap:5px}
+.region-pill{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:9px;
+  border:1.5px solid transparent;cursor:pointer;font-size:12px;font-weight:500;
+  color:var(--mid);transition:.15s;background:var(--cream)}
+.region-pill:hover{border-color:var(--g500);color:var(--g700)}
+.region-pill.active{border-color:var(--g600);color:var(--g700);background:var(--g50)}
+.rp-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;border:1.5px solid rgba(0,0,0,.1)}
+.rp-count{margin-left:auto;font-size:10px;color:var(--muted);
+  background:var(--cream-d);padding:1px 5px;border-radius:8px}
+
+/* Flavor wheel */
+.flavor-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.flavor-chip{padding:5px 7px;border-radius:8px;border:1.5px solid var(--border);
+  font-size:11.5px;font-weight:500;color:var(--mid);cursor:pointer;
+  transition:.14s;text-align:center;background:#fff;display:flex;align-items:center;gap:3px;justify-content:center}
+.flavor-chip:hover{border-color:var(--g500);color:var(--g700)}
+.flavor-chip.active{background:var(--g100);border-color:var(--g600);color:var(--g700);font-weight:600}
+
+/* Roast bar */
+.roast-bar{display:flex;border-radius:9px;overflow:hidden;border:1.5px solid var(--border);margin-top:3px}
+.roast-opt{flex:1;padding:6px 3px;text-align:center;font-size:10.5px;font-weight:600;
+  color:var(--muted);cursor:pointer;transition:.14s}
+.roast-opt:hover{background:var(--g50);color:var(--g700)}
+.roast-opt.active{background:var(--g700);color:#fff}
+.roast-hint{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);padding:3px 2px 0}
+
+/* Range */
+.range-row{display:flex;align-items:center;gap:9px;margin-top:7px}
+.range-input{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;outline:none;cursor:pointer;
+  background:linear-gradient(to right,var(--g600) 0%,var(--g600) 62%,var(--border) 62%)}
+.range-input::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;
+  border-radius:50%;background:var(--g600);border:3px solid #fff;
+  box-shadow:0 1px 4px rgba(0,0,0,.18);cursor:pointer}
+.range-val{font-size:11.5px;font-weight:600;color:var(--g700);min-width:34px;
+  text-align:right;font-family:var(--ff-m)}
+
+/* Check */
+.f-check{display:flex;align-items:center;gap:9px;padding:5px 0;cursor:pointer;
+  font-size:12.5px;color:var(--muted);user-select:none}
+.f-check:hover{color:var(--txt)}
+.chk-box{width:17px;height:17px;border-radius:4px;border:2px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;transition:.14s;background:#fff}
+.f-check:hover .chk-box{border-color:var(--g500)}
+.f-check.checked .chk-box{background:var(--g600);border-color:var(--g600);color:#fff;font-size:10px}
+.chk-count{margin-left:auto;font-size:10px;color:var(--muted);background:var(--cream-d);padding:1px 5px;border-radius:7px}
+
+/* Active filter tags */
+.active-tags{display:flex;flex-wrap:wrap;gap:5px;padding:10px 18px;
+  background:var(--g50);border-bottom:1px solid var(--border)}
+.at-tag{display:flex;align-items:center;gap:3px;background:#fff;
+  border:1px solid #c8e6c9;color:var(--g700);font-size:10.5px;font-weight:600;
+  padding:3px 7px 3px 9px;border-radius:20px}
+.at-tag button{width:13px;height:13px;border-radius:50%;background:#c8e6c9;
+  color:var(--g700);font-size:8px;display:flex;align-items:center;justify-content:center;margin-left:1px}
+
+/* ── PRODUCT GRID ── */
+.results-bar{display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.results-count{font-size:13.5px;color:var(--muted)}
+.results-count strong{color:var(--txt)}
+.results-count .filter-active{color:var(--g600);font-weight:600}
+.sort-row{display:flex;align-items:center;gap:7px}
+.sort-lbl{font-size:12.5px;color:var(--muted)}
+.sort-sel{height:36px;padding:0 30px 0 11px;border-radius:8px;
+  border:1.5px solid var(--border);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='5' viewBox='0 0 9 5'%3E%3Cpath d='M0 0l4.5 5L9 0z' fill='%23777'/%3E%3C/svg%3E") no-repeat right 9px center;
+  -webkit-appearance:none;font-family:var(--ff-b);font-size:12.5px;color:var(--txt);outline:none;cursor:pointer}
+.view-tog{display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
+.vt-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--muted);cursor:pointer;transition:.14s}
+.vt-btn.active,.vt-btn:hover{background:var(--g100);color:var(--g700)}
+
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:1080px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ── PRODUCT CARD ── */
+.prod-card{background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);
+  overflow:hidden;transition:all .24s;cursor:pointer;position:relative}
+.prod-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:transparent}
+
+/* Photo area — uses herkomst-achtergrondkleur */
+.card-photo{position:relative;aspect-ratio:4/5;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.card-photo-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  position:relative;transition:transform .38s}
+.prod-card:hover .card-photo-inner{transform:scale(1.04)}
+.card-photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* The product artwork: three-zone composition */
+.product-artwork{width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;padding-bottom:12%}
+.artwork-bag{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.bag-shape{font-size:clamp(52px,8vw,72px);line-height:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.18))}
+.bag-label{background:rgba(255,255,255,.92);backdrop-filter:blur(4px);
+  border-radius:6px;padding:4px 9px;margin-top:-6px;text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);max-width:88%}
+.bag-label-brand{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--g700)}
+.bag-label-name{font-size:10px;font-weight:600;color:var(--txt);line-height:1.2;margin-top:1px}
+.artwork-beans{position:absolute;bottom:6%;left:50%;transform:translateX(-50%);
+  font-size:18px;opacity:.6;white-space:nowrap;letter-spacing:2px}
+
+.card-badges{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:4px;z-index:3}
+.cb{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:5px;letter-spacing:.04em}
+.cb-new{background:var(--g700);color:#fff}
+.cb-sca{background:var(--gold);color:#fff}
+.cb-ltd{background:#c62828;color:#fff}
+.cb-bio{background:#2e7d32;color:#fff}
+.card-wish{position:absolute;top:9px;right:9px;width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.88);display:flex;align-items:center;justify-content:center;
+  font-size:14px;box-shadow:var(--sh-sm);transition:.18s;z-index:3}
+.card-wish:hover{transform:scale(1.12);background:#fff}
+
+/* Herkomst-kleur legenda-dot op de kaart */
+.origin-dot{position:absolute;bottom:9px;right:9px;width:10px;height:10px;
+  border-radius:50%;border:2px solid rgba(255,255,255,.7);z-index:3}
+
+.card-body{padding:14px 16px}
+.card-brand-row{display:flex;align-items:center;gap:5px;margin-bottom:5px}
+.brand-avatar{width:20px;height:20px;border-radius:5px;background:var(--g700);
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  font-size:9.5px;font-weight:700;flex-shrink:0}
+.brand-nm{font-size:10.5px;font-weight:700;color:var(--g700);letter-spacing:.04em;text-transform:uppercase}
+.brand-check{font-size:11px;color:var(--gold)}
+.card-title{font-family:var(--ff-d);font-size:15.5px;font-weight:600;color:var(--txt);
+  margin-bottom:4px;line-height:1.28}
+.card-origin{font-size:11.5px;color:var(--muted);display:flex;align-items:center;
+  gap:3px;margin-bottom:9px}
+.origin-region{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;
+  padding:2px 7px;border-radius:10px;color:#fff;margin-left:4px;opacity:.9}
+.card-flavors{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px}
+.fl-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:9px;
+  background:var(--cream-d);color:var(--mid)}
+.roast-dots{display:flex;gap:3px;margin-bottom:9px}
+.rd{width:9px;height:9px;border-radius:50%;background:var(--border)}
+.rd.on{background:var(--g700)}
+.card-rating{display:flex;align-items:center;gap:5px;margin-bottom:10px}
+.stars{color:var(--gold);font-size:13px;letter-spacing:.5px}
+.rat-score{font-size:12.5px;font-weight:700;color:var(--txt)}
+.rat-count{font-size:11px;color:var(--muted)}
+.card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  border-top:1px solid var(--border);padding-top:11px}
+.price-wrap{}
+.price-weight{font-size:10.5px;color:var(--muted)}
+.price-main{font-size:18px;font-weight:700;color:var(--txt);line-height:1}
+.price-per{font-size:10.5px;color:var(--muted);margin-top:1px}
+.btn-add{height:34px;padding:0 13px;border-radius:8px;background:var(--g700);color:#fff;
+  font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:5px;transition:.18s;flex-shrink:0}
+.btn-add:hover{background:var(--g600);transform:scale(1.02)}
+
+/* ── DETAIL PANEL ── */
+#detail-panel{display:none;background:#fff;border-radius:var(--r-lg);
+  border:1px solid var(--border);overflow:hidden;box-shadow:var(--sh-sm);
+  margin:0 24px 32px;max-width:calc(1300px - 48px);margin-left:auto;margin-right:auto}
+.dp-grid{display:grid;grid-template-columns:1fr 1fr;min-height:460px}
+.dp-photo{display:flex;align-items:center;justify-content:center;position:relative;
+  min-height:360px;overflow:hidden}
+.dp-photo-inner{width:100%;height:100%;display:flex;align-items:center;
+  justify-content:center;flex-direction:column;padding:40px}
+.dp-bag{font-size:96px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.2));line-height:1}
+.dp-label{background:rgba(255,255,255,.9);backdrop-filter:blur(6px);
+  border-radius:10px;padding:8px 16px;margin-top:8px;text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.12)}
+.dp-label-brand{font-size:11px;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--g700)}
+.dp-label-name{font-size:13px;font-weight:600;color:var(--txt);line-height:1.3;margin-top:2px}
+.dp-thumbs{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px}
+.dp-thumb{width:38px;height:38px;border-radius:8px;border:2px solid transparent;
+  cursor:pointer;font-size:16px;background:rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;transition:.14s}
+.dp-thumb.active,.dp-thumb:hover{border-color:var(--g600);background:#fff}
+.dp-info{padding:28px 30px;display:flex;flex-direction:column;gap:11px;overflow-y:auto;max-height:640px}
+.dp-brand-row{display:flex;align-items:center;gap:10px}
+.dp-brand-av{width:38px;height:38px;border-radius:10px;background:var(--g800);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
+.dp-brand-nm{font-size:13px;font-weight:700;color:var(--g700)}
+.dp-brand-city{font-size:11px;color:var(--muted)}
+.sca-pill{margin-left:auto;background:var(--gold-l);border:1px solid #e0c060;
+  color:var(--gold);font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:8px;
+  display:flex;align-items:center;gap:4px}
+.dp-title{font-family:var(--ff-d);font-size:23px;font-weight:700;color:var(--txt);line-height:1.2}
+.dp-tags-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;
+  letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:20px}
+.tag-g{background:var(--g100);color:var(--g700)}
+.tag-gold{background:var(--gold-l);color:var(--gold-d)}
+.tag-red{background:#ffebee;color:#c62828}
+.dp-specs{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.spec-item{background:var(--cream);border-radius:9px;padding:9px 13px}
+.spec-lbl{font-size:9.5px;font-weight:700;color:var(--muted);
+  letter-spacing:.07em;text-transform:uppercase;margin-bottom:2px}
+.spec-val{font-size:13px;font-weight:600;color:var(--txt);display:flex;align-items:center;gap:4px}
+.dp-desc{font-size:13.5px;color:var(--mid);line-height:1.68}
+.dp-flavors{display:flex;gap:5px;flex-wrap:wrap}
+.fp{padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:600;
+  background:var(--g100);color:var(--g800);border:1px solid var(--g100)}
+.dp-size-row{display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;border-top:1px solid var(--border);padding-top:13px}
+.size-picker{display:flex;gap:5px;flex-wrap:wrap}
+.sz-opt{padding:5px 11px;border-radius:7px;border:2px solid var(--border);
+  font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;
+  transition:.13s;text-align:center;line-height:1.3}
+.sz-opt.active{border-color:var(--g600);color:var(--g700);background:var(--g50)}
+.sz-opt span{display:block;font-size:11px;font-weight:400;color:var(--muted)}
+.dp-price{font-size:25px;font-weight:800;color:var(--txt);white-space:nowrap}
+.dp-price-sub{font-size:11px;color:var(--muted)}
+.dp-actions{display:flex;gap:8px}
+.btn-add-lg{height:44px;padding:0 22px;border-radius:11px;background:var(--g700);
+  color:#fff;font-size:14.5px;font-weight:700;display:flex;align-items:center;gap:7px;transition:.18s}
+.btn-add-lg:hover{background:var(--g600)}
+.btn-icon{width:44px;height:44px;border-radius:11px;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:18px;transition:.18s}
+.btn-icon:hover{border-color:var(--gold);color:var(--gold)}
+.dp-meta-strip{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);padding-top:2px}
+.dp-meta-strip span{display:flex;align-items:center;gap:4px}
+
+/* Tabs */
+.tabs{display:flex;gap:2px;border-bottom:2px solid var(--border);padding:0 30px}
+.tab{padding:10px 16px;font-size:13.5px;font-weight:600;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;
+  transition:.16s;display:flex;align-items:center;gap:5px}
+.tab:hover{color:var(--g700)}
+.tab.active{color:var(--g700);border-bottom-color:var(--g600)}
+.tab-content{padding:24px 30px}
+
+/* Reviews */
+.rv-summary{display:grid;grid-template-columns:auto 1fr;gap:28px;
+  margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.rv-big{font-size:52px;font-weight:800;color:var(--txt);font-family:var(--ff-d);line-height:1}
+.rv-stars{font-size:18px;color:var(--gold);margin:3px 0}
+.rv-cnt{font-size:12.5px;color:var(--muted)}
+.bar-row{display:flex;align-items:center;gap:8px;font-size:12px;margin-bottom:5px}
+.bar-lbl{width:28px;text-align:right;color:var(--muted)}
+.bar-track{flex:1;height:7px;background:var(--cream-d);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:var(--gold);border-radius:3px}
+.bar-pct{width:26px;font-size:11px;color:var(--muted)}
+.rv-filter-row{display:flex;align-items:center;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.rvf-btn{padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);
+  font-size:11.5px;font-weight:600;color:var(--muted);cursor:pointer;transition:.14s;background:#fff}
+.rvf-btn.active,.rvf-btn:hover{background:var(--g100);border-color:var(--g500);color:var(--g700)}
+.rv-card{padding:16px 0;border-bottom:1px solid var(--border)}
+.rv-card:last-child{border-bottom:none}
+.rv-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:9px}
+.rv-av{width:34px;height:34px;border-radius:50%;background:var(--g100);
+  color:var(--g700);font-weight:700;font-size:13px;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0}
+.rv-nm{font-size:13.5px;font-weight:600}
+.rv-meta{font-size:10.5px;color:var(--muted);margin-top:1px}
+.rv-verified{color:var(--g600);font-size:11px;font-weight:600;display:flex;align-items:center;gap:2px}
+.rv-body{font-size:13.5px;color:var(--mid);line-height:1.65}
+.rv-ftags{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+.rv-ftag{font-size:10.5px;padding:2px 7px;border-radius:8px;background:var(--cream-d);color:var(--muted)}
+.rv-helpful{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:11.5px;color:var(--muted)}
+.helpful-btn{display:flex;align-items:center;gap:3px;padding:3px 7px;border-radius:5px;transition:.13s}
+.helpful-btn:hover{background:var(--cream-d);color:var(--txt)}
+.roastery-reply{margin-top:11px;padding:11px 13px;background:var(--g50);
+  border-left:3px solid var(--g600);border-radius:0 8px 8px 0}
+.rr-hdr{font-size:11px;font-weight:700;color:var(--g700);margin-bottom:4px;display:flex;align-items:center;gap:5px}
+.rr-body{font-size:12.5px;color:var(--mid);line-height:1.6}
+
+/* ── ROASTERIES SECTION ── */
+.roastery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.roastery-card{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  cursor:pointer;transition:.22s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.roastery-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:transparent}
+.rc-header{height:72px;position:relative;flex-shrink:0}
+.rc-header-bg{position:absolute;inset:0}
+.rc-featured{position:absolute;top:10px;left:10px;background:var(--gold);color:#fff;
+  font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:.04em;z-index:2}
+.rc-logo{width:56px;height:56px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+  position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);
+  border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.18);z-index:2}
+.rc-body{padding:36px 16px 0;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+.rc-name{font-family:var(--ff-d);font-size:15px;font-weight:700;color:var(--txt);line-height:1.2}
+.rc-city{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px}
+.rc-rating{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--txt)}
+.rc-tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;
+  font-size:10px;font-weight:600;background:var(--g100);color:var(--g700)}
+.rc-cta{margin-top:auto;width:100%;padding:14px 16px 16px;border-top:1px solid var(--border)}
+.rc-cta-btn{width:100%;height:34px;border-radius:8px;background:var(--g900);color:#fff;
+  font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center;
+  gap:5px;transition:.18s;border:none;cursor:pointer}
+.roastery-card:hover .rc-cta-btn{background:var(--g700)}
+
+/* ── COLOUR KEY ── */
+.colour-key{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:20px 24px;margin-bottom:24px}
+.ck-title{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.ck-grid{display:flex;flex-wrap:wrap;gap:8px}
+.ck-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--mid)}
+.ck-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;border:1.5px solid rgba(0,0,0,.08)}
+.ck-item strong{color:var(--txt);font-weight:600}
+
+/* ── ROASTERY PANEL ── */
+#roastery-panel{display:none;background:#fff;border-radius:var(--r-lg);
+  border:1px solid var(--border);overflow:hidden;box-shadow:var(--sh-sm);
+  margin:0 24px 32px;max-width:calc(1300px - 48px);margin-left:auto;margin-right:auto}
+.rp-hero{background:linear-gradient(140deg,var(--g900) 0%,#2a4a18 100%);
+  padding:36px 40px;display:grid;grid-template-columns:1fr auto;gap:32px;
+  align-items:start;position:relative;overflow:hidden}
+.rp-hero-noise{position:absolute;inset:0;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")}
+.rp-hero-left{position:relative;z-index:1}
+.rp-hero-eyebrow{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.rp-hero-logo-inline{width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.rp-hero-name{font-family:var(--ff-d);font-size:30px;font-weight:700;color:#fff;margin-bottom:6px}
+.rp-hero-city{color:rgba(255,255,255,.6);font-size:13px;display:flex;align-items:center;
+  gap:6px;margin-bottom:14px}
+.rp-hero-desc{color:rgba(255,255,255,.78);font-size:14px;line-height:1.7;
+  max-width:560px;margin-bottom:20px}
+.rp-hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.rp-stat{text-align:center}
+.rp-stat-val{font-size:22px;font-weight:800;color:#fff;line-height:1}
+.rp-stat-lbl{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;
+  letter-spacing:.07em;margin-top:3px}
+.rp-hero-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.rp-link{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:8px;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:12.5px;
+  font-weight:500;transition:.2s;cursor:pointer;border:none}
+.rp-link:hover{background:rgba(255,255,255,.18);color:#fff}
+.rp-certs-box{position:relative;z-index:1;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);border-radius:14px;
+  padding:20px 22px;min-width:180px;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.rp-certs-title{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.rp-cert-badge{display:flex;align-items:center;gap:6px;background:var(--gold-light);
+  border:1px solid #e0c070;border-radius:7px;padding:5px 10px;
+  font-size:11.5px;font-weight:700;color:var(--gold)}
+.rp-body{padding:28px 32px;display:flex;flex-direction:column;gap:28px}
+.rp-section-title{font-family:var(--ff-d);font-size:17px;font-weight:700;
+  color:var(--txt);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.rp-prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rp-prod-card{display:flex;align-items:center;gap:12px;padding:12px 14px;
+  background:var(--cream);border-radius:11px;border:1px solid var(--border);
+  cursor:pointer;transition:.18s}
+.rp-prod-card:hover{background:#fff;box-shadow:var(--sh-sm);border-color:var(--g300,#a5d6a7)}
+.rp-prod-thumb{width:52px;height:52px;border-radius:9px;flex-shrink:0;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;font-size:22px}
+.rp-prod-thumb img{width:100%;height:100%;object-fit:cover}
+.rp-prod-info{flex:1;min-width:0}
+.rp-prod-name{font-size:13px;font-weight:700;color:var(--txt);line-height:1.2;margin-bottom:2px}
+.rp-prod-origin{font-size:11px;color:var(--muted)}
+.rp-prod-price{font-size:14px;font-weight:800;color:var(--txt);flex-shrink:0}
+.rp-about{background:var(--cream);border-radius:12px;padding:20px 24px}
+.rp-about p{font-size:14px;color:var(--mid);line-height:1.75}
+.rp-back-btn{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;
+  color:var(--g600);background:none;border:none;cursor:pointer;padding:18px 24px 0}
+.rp-back-btn:hover{color:var(--g700)}
+
+/* ── QUIZ CTA ── */
+.quiz-cta{background:linear-gradient(140deg,var(--g900),#1d3d0e);border-radius:var(--r-lg);
+  padding:38px 46px;display:grid;grid-template-columns:1fr auto;gap:32px;
+  align-items:center;position:relative;overflow:hidden;margin:36px 0}
+.qc-bg{position:absolute;right:-10px;top:-10px;font-size:190px;opacity:.04;line-height:1}
+.qc-eyebrow{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;margin-bottom:9px}
+.qc-title{font-family:var(--ff-d);font-size:26px;font-weight:700;color:#fff;
+  margin-bottom:9px;line-height:1.22}
+.qc-sub{color:rgba(255,255,255,.68);font-size:14.5px;line-height:1.6}
+.qc-side{display:flex;flex-direction:column;align-items:center;gap:7px;flex-shrink:0}
+.btn-quiz{height:50px;padding:0 30px;border-radius:13px;background:var(--gold);
+  color:#fff;font-size:15px;font-weight:700;white-space:nowrap;transition:.2s;font-family:var(--ff-b)}
+.btn-quiz:hover{background:#b8852e;transform:translateY(-1px)}
+.qc-note{color:rgba(255,255,255,.45);font-size:11.5px}
+
+/* ── FOOTER ── */
+.footer{background:var(--g900);color:rgba(255,255,255,.58);margin-top:60px}
+.footer-main{max-width:1300px;margin:0 auto;padding:52px 24px 36px;
+  display:grid;grid-template-columns:260px 1fr;gap:44px}
+.footer-brand p{font-size:12.5px;line-height:1.7;max-width:210px;margin-top:12px}
+.footer-socials{display:flex;gap:7px;margin-top:18px}
+.soc-btn{width:32px;height:32px;border-radius:7px;background:rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;font-size:14px;transition:.18s}
+.soc-btn:hover{background:var(--gold);color:#fff}
+.footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.footer-col h4{color:#fff;font-size:12px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:13px}
+.footer-col a{display:block;font-size:12.5px;padding:2px 0;transition:color .13s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);max-width:1300px;
+  margin:0 auto;padding:18px 24px;display:flex;align-items:center;
+  justify-content:space-between;font-size:11.5px;flex-wrap:wrap;gap:7px}
+.f-badges{display:flex;gap:8px;flex-wrap:wrap}
+.f-badge{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);
+  color:rgba(255,255,255,.45);font-size:9.5px;font-weight:600;padding:3px 8px;border-radius:5px}
+
+/* ── CART DRAWER ── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:400;
+  opacity:0;pointer-events:none;transition:opacity .28s;backdrop-filter:blur(2px)}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:-420px;width:420px;height:100vh;
+  background:#fff;z-index:401;box-shadow:-10px 0 40px rgba(0,0,0,.14);
+  transition:right .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.cart-drawer.open{right:0}
+.cd-hdr{padding:18px 22px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between}
+.cd-title{font-family:var(--ff-d);font-size:19px;font-weight:700}
+.cd-close{width:34px;height:34px;border-radius:9px;background:var(--cream-d);
+  display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer}
+.cd-close:hover{background:var(--border)}
+.cd-items{flex:1;overflow-y:auto;padding:14px 22px;display:flex;flex-direction:column;gap:12px}
+.cd-item{display:flex;align-items:center;gap:12px;padding:12px;
+  background:var(--cream);border-radius:11px}
+.cd-img{width:52px;height:52px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-size:24px;flex-shrink:0}
+.cd-info{flex:1}
+.cd-name{font-size:13.5px;font-weight:600}
+.cd-brand{font-size:10.5px;color:var(--muted)}
+.cd-fresh{font-size:10.5px;color:var(--g600);margin-top:2px}
+.cd-controls{display:flex;align-items:center;gap:7px;margin-top:7px}
+.qty-btn{width:24px;height:24px;border-radius:5px;background:#fff;
+  border:1.5px solid var(--border);display:flex;align-items:center;
+  justify-content:center;font-size:13px;font-weight:700;cursor:pointer;transition:.13s}
+.qty-btn:hover{border-color:var(--g500);color:var(--g700)}
+.qty-val{font-size:13.5px;font-weight:700;min-width:18px;text-align:center}
+.cd-price{font-size:15px;font-weight:700;margin-left:auto}
+.cd-footer{padding:18px 22px;border-top:1px solid var(--border)}
+.cd-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px;color:var(--muted)}
+.cd-total{display:flex;justify-content:space-between;font-size:16.5px;font-weight:700;margin-bottom:14px}
+.btn-checkout{width:100%;height:48px;border-radius:11px;background:var(--g700);
+  color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;
+  justify-content:center;gap:7px;transition:.18s;font-family:var(--ff-b)}
+.btn-checkout:hover{background:var(--g600)}
+.cd-pay-note{text-align:center;font-size:11.5px;color:var(--muted);margin-top:9px}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);
+  background:var(--g900);color:#fff;padding:11px 18px;border-radius:11px;
+  font-size:13.5px;font-weight:500;z-index:500;transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;align-items:center;gap:7px;box-shadow:var(--sh-lg);white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── BAG SVG ── */
+.bag-svg-wrap{width:100%;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8%}
+.bag-svg-wrap svg{width:52%;max-width:155px;filter:drop-shadow(2px 8px 14px rgba(0,0,0,.32));transition:transform .38s}
+.prod-card:hover .bag-svg-wrap svg{transform:scale(1.06) translateY(-4px)}
+
+/* ── SECTION GENERIC ── */
+section{padding:36px 0}
+.section-hdr{display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:24px;gap:14px}
+.section-title{font-family:var(--ff-d);font-size:25px;font-weight:700;line-height:1.2}
+.section-sub{color:var(--muted);font-size:13.5px;margin-top:3px}
+.section-link{font-size:13.5px;font-weight:600;color:var(--g600);
+  display:flex;align-items:center;gap:3px;white-space:nowrap}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;
+  color:var(--g600);font-weight:600;cursor:pointer;background:none;border:none;
+  padding:0;margin-bottom:14px}
+
+/* ══════════════════════════════════════════════
+   MOBILE HAMBURGER MENU
+══════════════════════════════════════════════ */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;
+  align-items:center;width:40px;height:40px;border-radius:9px;gap:5px;
+  background:rgba(255,255,255,.1);margin-left:auto;flex-shrink:0;cursor:pointer}
+.nav-hamburger span{display:block;width:20px;height:2px;background:#fff;
+  border-radius:2px;transition:.25s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;
+  background:var(--g900);z-index:199;padding:16px;flex-direction:column;gap:4px;
+  border-bottom:2px solid rgba(255,255,255,.08);max-height:calc(100vh - var(--nav-h));
+  overflow-y:auto}
+.nav-mobile-menu.open{display:flex}
+.nav-mobile-menu .nav-link{padding:12px 14px;border-radius:10px;font-size:14px}
+.nav-mobile-menu .nav-link:hover,.nav-mobile-menu .nav-link.active{background:rgba(255,255,255,.12)}
+.nav-mobile-search{position:relative;margin-bottom:8px}
+.nav-mobile-search input{width:100%;height:44px;border-radius:10px;border:2px solid transparent;
+  background:rgba(255,255,255,.1);color:#fff;padding:0 48px 0 16px;
+  font-family:var(--ff-b);font-size:14px;outline:none}
+.nav-mobile-search input::placeholder{color:rgba(255,255,255,.45)}
+.nav-mobile-search input:focus{background:rgba(255,255,255,.15);border-color:var(--gold)}
+.nav-mobile-search-btn{position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;border-radius:8px;background:var(--gold);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav-mobile-actions{display:flex;gap:8px;margin-top:8px}
+.nav-mobile-actions .btn-nav{flex:1;justify-content:center;height:42px}
+
+/* ── FILTERS TOGGLE (mobile) ── */
+.filters-toggle-btn{display:none;width:100%;height:42px;border-radius:10px;
+  background:var(--g900);color:#fff;font-size:13.5px;font-weight:600;
+  align-items:center;justify-content:center;gap:8px;margin-bottom:14px;cursor:pointer}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+══════════════════════════════════════════════ */
+
+/* ── Tablet (≤900px) ── */
+@media(max-width:900px){
+  /* Nav */
+  .nav-search,.nav-links,.nav-actions{display:none}
+  .nav-hamburger{display:flex}
+  .nav-logo svg{height:60px}
+
+  /* Hero */
+  .hero-inner{grid-template-columns:1fr;gap:28px;padding:36px 20px}
+  .hero-card{display:none}
+  .hero-title{font-size:clamp(26px,5vw,38px)}
+  .hero-sub{font-size:15px}
+
+  /* Layout: sidebar + content → single column */
+  .page-layout{grid-template-columns:1fr;padding:20px 16px;gap:16px}
+  .filters{position:static;display:none}
+  .filters.mobile-open{display:block}
+  .filters-toggle-btn{display:flex}
+
+  /* Footer */
+  .footer-main{grid-template-columns:1fr;gap:28px}
+  .footer-cols{grid-template-columns:repeat(2,1fr);gap:20px}
+
+  /* Quiz CTA */
+  .quiz-cta{grid-template-columns:1fr;padding:28px 24px;gap:20px;text-align:center}
+  .qc-side{flex-direction:row;justify-content:center}
+
+  /* Detail panel */
+  .dp-grid{grid-template-columns:1fr}
+  .dp-photo{min-height:240px}
+  #detail-panel{margin:0 16px 24px}
+
+  /* Roastery panel */
+  .rp-hero{grid-template-columns:1fr;gap:20px;padding:24px}
+  .rp-certs-box{min-width:unset}
+  .rp-prod-grid{grid-template-columns:1fr 1fr}
+  .rp-body{padding:20px 20px}
+  #roastery-panel{margin:0 16px 24px}
+
+  /* Roastery grid */
+  .roastery-grid{grid-template-columns:repeat(2,1fr)}
+
+  /* Product grid */
+  .prod-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+
+  /* Results bar */
+  .results-bar{flex-direction:column;align-items:flex-start}
+}
+
+/* ── Mobile (≤600px) ── */
+@media(max-width:600px){
+  /* Container */
+  .container{padding:0 14px}
+
+  /* Hero */
+  .hero-inner{padding:28px 14px}
+  .hero-sub{max-width:100%}
+  .hero-trust{gap:12px}
+  .btn{height:44px;font-size:14px}
+
+  /* USP strip */
+  .usp-inner{flex-direction:column;align-items:flex-start;padding:12px 14px;gap:8px}
+
+  /* Page layout */
+  .page-layout{padding:14px 12px}
+
+  /* Product grid: single column */
+  .prod-grid{grid-template-columns:1fr;gap:12px}
+
+  /* Roastery grid */
+  .roastery-grid{grid-template-columns:1fr 1fr;gap:12px}
+
+  /* Section headers */
+  .section-hdr{flex-direction:column;align-items:flex-start;gap:6px}
+
+  /* Detail panel: make it full-width */
+  #detail-panel{margin:0 0 16px;border-radius:0;border-left:none;border-right:none}
+  .dp-info{padding:18px 16px}
+  .tabs{padding:0 16px}
+  .tab{padding:10px 10px;font-size:12.5px}
+  .tab-content{padding:18px 16px}
+  .dp-specs{grid-template-columns:1fr 1fr}
+  .dp-actions{flex-wrap:wrap}
+  .btn-add-lg{flex:1}
+
+  /* Roastery panel */
+  #roastery-panel{margin:0 0 16px;border-radius:0;border-left:none;border-right:none}
+  .rp-hero{padding:20px 16px}
+  .rp-hero-name{font-size:22px}
+  .rp-hero-stats{gap:16px}
+  .rp-prod-grid{grid-template-columns:1fr}
+  .rp-body{padding:16px}
+
+  /* Quiz CTA */
+  .quiz-cta{padding:24px 16px;margin:20px 0}
+  .qc-title{font-size:20px}
+  .btn-quiz{height:44px;padding:0 22px;font-size:14px}
+
+  /* Cart drawer */
+  .cart-drawer{width:100%;right:-100%}
+  .cart-drawer.open{right:0}
+
+  /* Footer */
+  .footer-main{padding:36px 14px 24px}
+  .footer-cols{grid-template-columns:1fr 1fr;gap:16px}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+
+  /* Reviews */
+  .rv-summary{grid-template-columns:1fr;gap:14px}
+
+  /* Card body */
+  .card-body{padding:12px 12px}
+
+  /* Toast: full width */
+  .toast{left:12px;right:12px;transform:translateX(0) translateY(70px);white-space:normal;text-align:center}
+  .toast.show{transform:translateX(0) translateY(0)}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="30 0 650 140" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(50,78) rotate(-40)">
+          <ellipse cx="0" cy="0" rx="11" ry="16" fill="#C8913A" stroke="#E8B86D" stroke-width="1.1"/>
+          <path d="M-3,-12 C-7,-5 7,5 3,12" fill="none" stroke-linecap="round" stroke="#F0D090" stroke-width="1.0"/>
+        </g>
+        <g transform="translate(68,72) rotate(-18)">
+          <ellipse cx="0" cy="0" rx="15" ry="21" fill="#8B4A28" stroke="#C8913A" stroke-width="1.2"/>
+          <path d="M-5,-17 C-11,-7 11,7 5,17" fill="none" stroke-linecap="round" stroke="#C8913A" stroke-width="1.3"/>
+        </g>
+        <g transform="translate(90,76) rotate(14)">
+          <ellipse cx="0" cy="0" rx="19" ry="27" fill="#5a3010" stroke="#6B3A2A" stroke-width="1.3"/>
+          <path d="M-6,-21 C-13,-9 13,9 6,21" fill="none" stroke-linecap="round" stroke="#7A4530" stroke-width="1.6"/>
+        </g>
+        <text x="126" y="97" font-family="Georgia,'Times New Roman',serif" font-size="58" font-weight="700" letter-spacing="-0.5" fill="#F5ECD7">Roast<tspan fill="#C8913A">Select</tspan></text>
+      </svg>
+    </a>
+    <div class="nav-search">
+      <input type="text" placeholder="Zoek op boon, smaak, herkomst of branderij…">
+      <button class="nav-search-btn">🔍</button>
+    </div>
+    <div class="nav-links">
+      <a href="#catalog" class="nav-link active">🫘 Koffiebonen</a>
+      <a href="#roasteries" class="nav-link">🏭 Branderijen</a>
+      <a href="#quiz" class="nav-link">✨ Smaakadvies</a>
+      <a href="#" class="nav-link">📦 Abonnement</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-nav btn-nav-ghost" id="cartBtn">
+        🛒 Winkelwagen <span class="badge" id="cartCount">2</span>
+      </button>
+      <button class="btn-nav btn-nav-cta">Inloggen</button>
+    </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu openen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <div class="nav-mobile-search">
+    <input type="text" placeholder="Zoek op boon, smaak, herkomst…">
+    <button class="nav-mobile-search-btn">🔍</button>
+  </div>
+  <a href="#catalog" class="nav-link active" onclick="closeMobileMenu()">🫘 Koffiebonen</a>
+  <a href="#roasteries" class="nav-link" onclick="closeMobileMenu()">🏭 Branderijen</a>
+  <a href="#quiz" class="nav-link" onclick="closeMobileMenu()">✨ Smaakadvies</a>
+  <a href="#" class="nav-link" onclick="closeMobileMenu()">📦 Abonnement</a>
+  <div class="nav-mobile-actions">
+    <button class="btn-nav btn-nav-ghost" onclick="closeMobileMenu();document.getElementById('cartBtn').click()">
+      🛒 Winkelwagen <span class="badge">2</span>
+    </button>
+    <button class="btn-nav btn-nav-cta" onclick="closeMobileMenu()">Inloggen</button>
+  </div>
+</div>
+
+<!-- Category bar -->
+<div class="cat-bar">
+  <div class="cat-inner">
+    <a href="#" class="cat-item active">🌍 Alle bonen</a>
+    <a href="#" class="cat-item">🇪🇹 Ethiopisch</a>
+    <a href="#" class="cat-item">🇨🇴 Colombia</a>
+    <a href="#" class="cat-item">🇧🇷 Brazilië</a>
+    <a href="#" class="cat-item">🇬🇹 Guatemala</a>
+    <a href="#" class="cat-item">🇾🇪 Jemen</a>
+    <a href="#" class="cat-item">🇰🇪 Kenia</a>
+    <a href="#" class="cat-item">🫖 Filterkoffie</a>
+    <a href="#" class="cat-item">☕ Espresso</a>
+    <a href="#" class="cat-item">🧊 Cold Brew</a>
+    <a href="#" class="cat-item">🌱 Biologisch</a>
+    <a href="#" class="cat-item">🏆 Top beoordeeld</a>
+    <a href="#" class="cat-item">✨ Gelimiteerd</a>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">☕ Specialty Coffee Marktplaats</div>
+      <h1 class="hero-title">De <em>beste koffiebonen</em><br>van onafhankelijke<br>Nederlandse branderijen</h1>
+      <p class="hero-sub">Rechtstreeks van de branderij, vers geroosterd, met volledige transparantie over herkomst, verwerking en smaak.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="#catalog" class="btn btn-gold">🔍 Ontdek alle bonen</a>
+        <a href="#quiz" class="btn btn-ghost">✨ Smaakadvies op maat</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">☕ 48 gecureerde branderijen</div>
+        <div class="trust-item">⭐ The Roast Standard gecertificeerd</div>
+        <div class="trust-item">🚀 Vers: max. 48u na roosten</div>
+        <div class="trust-item">🌍 8 herkomstregio's</div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-hdr">🔥 Populair deze week</div>
+      <div class="feat-item" onclick="openDetail('yirg')">
+        <div class="feat-thumb" style="background:#C9724A">
+          <div class="feat-thumb-img">☕</div>
+        </div>
+        <div class="feat-info">
+          <div class="feat-name">Yirgacheffe Natural G1</div>
+          <div class="feat-brand">Friedhats Coffee · Amsterdam</div>
+        </div>
+        <div class="feat-price">€17,50</div>
+      </div>
+      <div class="feat-item" onclick="openDetail('colombia')">
+        <div class="feat-thumb" style="background:#A0744E">
+          <div class="feat-thumb-img">🫘</div>
+        </div>
+        <div class="feat-info">
+          <div class="feat-name">Colombia Huila Washed</div>
+          <div class="feat-brand">Bocca Coffee · Amsterdam</div>
+        </div>
+        <div class="feat-price">€15,50</div>
+      </div>
+      <div class="feat-item" onclick="openDetail('geisha')">
+        <div class="feat-thumb" style="background:#6B3A2A">
+          <div class="feat-thumb-img">✨</div>
+        </div>
+        <div class="feat-info">
+          <div class="feat-name">Panama Geisha Honey</div>
+          <div class="feat-brand">Speciaal Koffie · Utrecht</div>
+        </div>
+        <div class="feat-price">€24,00</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- USP strip -->
+<div class="usp-strip">
+  <div class="usp-inner">
+    <div class="usp-item"><strong>🚀 Gratis verzending</strong> vanaf €25</div>
+    <div class="usp-item"><strong>☕ Altijd vers</strong> — max. 10 dagen roosttdatum→levering</div>
+    <div class="usp-item"><strong>🏆 The Roast Standard</strong> — SCA 80+ gegarandeerd</div>
+    <div class="usp-item"><strong>↩️ Kwaliteitsgarantie</strong> of geld terug</div>
+    <div class="usp-item"><strong>🌱 Duurzaam</strong> — recyclebare verpakkingen</div>
+  </div>
+</div>
+
+<!-- ═══ MAIN CATALOG ═══ -->
+<div id="catalog" style="padding-top:6px">
+<div style="max-width:1300px;margin:0 auto;padding:0 16px">
+  <button class="filters-toggle-btn" id="filtersToggleBtn" onclick="toggleMobileFilters()">
+    🎯 Filters tonen/verbergen
+  </button>
+</div>
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="filters">
+    <div class="f-head">
+      <div class="f-head-title">🎯 Filters</div>
+      <button class="f-reset">Wis alles</button>
+    </div>
+
+    <div class="active-tags">
+      <div class="at-tag">Oost-Afrika <button onclick="this.parentElement.remove()">✕</button></div>
+      <div class="at-tag">Light Roast <button onclick="this.parentElement.remove()">✕</button></div>
+    </div>
+
+    <!-- Herkomstregio met kleurcodes -->
+    <div class="f-group">
+      <div class="f-group-hdr"><div class="f-label">🌍 Herkomstregio</div><div class="f-caret">▾</div></div>
+      <div class="region-pills">
+        <div class="region-pill active" onclick="this.classList.toggle('active')">
+          <div class="rp-dot" style="background:#C9724A"></div>Oost-Afrika (Eth, Ken, Rwa)<span class="rp-count">48</span>
+        </div>
+        <div class="region-pill" onclick="this.classList.toggle('active')">
+          <div class="rp-dot" style="background:#C9A84C"></div>Centraal-Afrika<span class="rp-count">14</span>
+        </div>
+        <div class="region-pill" onclick="this.classList.toggle('active')">
+          <div class="rp-dot" style="background:#9B9BC9"></div>Arabisch / Azië<span class="rp-count">11</span>
+        </div>
+        <div class="region-pill" onclick="this.classList.toggle('active')">
+          <div class="rp-dot" style="background:#6BAA78"></div>Centraal-Amerika<span class="rp-count">29</span>
+        </div>
+        <div class="region-pill" onclick="this.classList.toggle('active')">
+          <div class="rp-dot" style="background:#A0744E"></div>Zuid-Amerika<span class="rp-count">37</span>
+        </div>
+        <div class="region-pill" onclick="this.classList.toggle('active')">
+          <div class="rp-dot" style="background:#7ABFBF"></div>Pacific & Oceanië<span class="rp-count">6</span>
+        </div>
+        <div class="region-pill" onclick="this.classList.toggle('active')">
+          <div class="rp-dot" style="background:#8A9BA8"></div>Blends & Huismengsels<span class="rp-count">22</span>
+        </div>
+        <div class="region-pill" onclick="this.classList.toggle('active')">
+          <div class="rp-dot" style="background:#6B3A2A"></div>Gelimiteerde edities<span class="rp-count">8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bereiding -->
+    <div class="f-group">
+      <div class="f-group-hdr"><div class="f-label">☕ Bereiding</div><div class="f-caret">▾</div></div>
+      <div class="flavor-grid">
+        <div class="flavor-chip active" onclick="this.classList.toggle('active')">☕ Espresso</div>
+        <div class="flavor-chip active" onclick="this.classList.toggle('active')">🫖 Filter</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🍶 Pour-over</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🧊 Cold Brew</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🏺 Aeropress</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🌊 Chemex</div>
+      </div>
+    </div>
+
+    <!-- Roostniveau -->
+    <div class="f-group">
+      <div class="f-group-hdr"><div class="f-label">🔥 Roostniveau</div><div class="f-caret">▾</div></div>
+      <div class="roast-bar">
+        <div class="roast-opt active" onclick="setRoast(this)">Light</div>
+        <div class="roast-opt" onclick="setRoast(this)">Medium</div>
+        <div class="roast-opt" onclick="setRoast(this)">Med-Dark</div>
+        <div class="roast-opt" onclick="setRoast(this)">Dark</div>
+      </div>
+      <div class="roast-hint"><span>🌿 Fruitig/bloemig</span><span>🍫 Chocolade/nootachtig</span></div>
+    </div>
+
+    <!-- Smaakprofiel -->
+    <div class="f-group">
+      <div class="f-group-hdr"><div class="f-label">👅 Smaakprofiel</div><div class="f-caret">▾</div></div>
+      <div class="flavor-grid">
+        <div class="flavor-chip active" onclick="this.classList.toggle('active')">🍓 Fruitig</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🌸 Bloemig</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🍫 Chocolade</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🥜 Nootachtig</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🍦 Karamel</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🍷 Wijnachtig</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🌿 Kruidig</div>
+        <div class="flavor-chip" onclick="this.classList.toggle('active')">🍋 Citrus</div>
+      </div>
+    </div>
+
+    <!-- Verwerking -->
+    <div class="f-group">
+      <div class="f-group-hdr"><div class="f-label">⚙️ Verwerking</div><div class="f-caret">▾</div></div>
+      <label class="f-check checked" onclick="toggle(this)"><div class="chk-box">✓</div>Natural<span class="chk-count">31</span></label>
+      <label class="f-check" onclick="toggle(this)"><div class="chk-box"></div>Washed<span class="chk-count">42</span></label>
+      <label class="f-check" onclick="toggle(this)"><div class="chk-box"></div>Honey Process<span class="chk-count">18</span></label>
+      <label class="f-check" onclick="toggle(this)"><div class="chk-box"></div>Anaerobic<span class="chk-count">9</span></label>
+    </div>
+
+    <!-- Prijs -->
+    <div class="f-group">
+      <div class="f-group-hdr"><div class="f-label">💶 Prijs per 250g</div><div class="f-caret">▾</div></div>
+      <div class="range-row">
+        <span style="font-size:11px;color:var(--muted)">€8</span>
+        <input type="range" class="range-input" min="8" max="45" value="28" oninput="document.getElementById('pv').textContent='€'+this.value">
+        <span class="range-val" id="pv">€28</span>
+      </div>
+    </div>
+
+    <!-- SCA score -->
+    <div class="f-group">
+      <div class="f-group-hdr"><div class="f-label">⭐ SCA-score (min.)</div><div class="f-caret">▾</div></div>
+      <div class="range-row">
+        <span style="font-size:11px;color:var(--muted)">80</span>
+        <input type="range" class="range-input" min="80" max="100" value="85" oninput="document.getElementById('sv').textContent=this.value+'pt'">
+        <span class="range-val" id="sv">85pt</span>
+      </div>
+    </div>
+
+    <!-- Certificering -->
+    <div class="f-group">
+      <div class="f-group-hdr"><div class="f-label">🌱 Certificering</div><div class="f-caret">▾</div></div>
+      <label class="f-check" onclick="toggle(this)"><div class="chk-box"></div>Biologisch<span class="chk-count">29</span></label>
+      <label class="f-check" onclick="toggle(this)"><div class="chk-box"></div>Fairtrade<span class="chk-count">22</span></label>
+      <label class="f-check" onclick="toggle(this)"><div class="chk-box"></div>Direct Trade<span class="chk-count">38</span></label>
+      <label class="f-check" onclick="toggle(this)"><div class="chk-box"></div>Rainforest Alliance<span class="chk-count">14</span></label>
+    </div>
+
+    <!-- Branderij -->
+    <div class="f-group">
+      <div class="f-group-hdr"><div class="f-label">🏭 Branderij</div><div class="f-caret">▾</div></div>
+      <label class="f-check" data-brand="Hoeksche Branders" onclick="toggleBrand(this)"><div class="chk-box"></div>Hoeksche Branders<span class="chk-count">6</span></label>
+      <label class="f-check" data-brand="Giraffe Coffee" onclick="toggleBrand(this)"><div class="chk-box"></div>Giraffe Coffee<span class="chk-count">3</span></label>
+      <label class="f-check" data-brand="Belgian Blenders" onclick="toggleBrand(this)"><div class="chk-box"></div>Belgian Blenders<span class="chk-count">7</span></label>
+      <div style="border-top:1px solid var(--border);margin:6px 0"></div>
+      <label class="f-check" data-brand="Friedhats Coffee" onclick="toggleBrand(this)"><div class="chk-box"></div>Friedhats Coffee<span class="chk-count">1</span></label>
+      <label class="f-check" data-brand="Bocca Coffee" onclick="toggleBrand(this)"><div class="chk-box"></div>Bocca Coffee<span class="chk-count">1</span></label>
+      <label class="f-check" data-brand="White Label Coffee" onclick="toggleBrand(this)"><div class="chk-box"></div>White Label Coffee<span class="chk-count">1</span></label>
+      <label class="f-check" data-brand="Koffie Klassiek" onclick="toggleBrand(this)"><div class="chk-box"></div>Koffie Klassiek<span class="chk-count">1</span></label>
+      <label class="f-check" data-brand="Speciaal Koffie" onclick="toggleBrand(this)"><div class="chk-box"></div>Speciaal Koffie<span class="chk-count">1</span></label>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- Colour key legend -->
+    <div class="colour-key">
+      <div class="ck-title">🎨 Achtergrondkleur per herkomstregio — RoastSelect Beeldstandaard</div>
+      <div class="ck-grid">
+        <div class="ck-item"><div class="ck-dot" style="background:#C9724A"></div><strong>Oost-Afrika</strong></div>
+        <div class="ck-item"><div class="ck-dot" style="background:#C9A84C"></div><strong>Centraal-Afrika</strong></div>
+        <div class="ck-item"><div class="ck-dot" style="background:#9B9BC9"></div><strong>Arabisch/Azië</strong></div>
+        <div class="ck-item"><div class="ck-dot" style="background:#6BAA78"></div><strong>Centraal-Amerika</strong></div>
+        <div class="ck-item"><div class="ck-dot" style="background:#A0744E"></div><strong>Zuid-Amerika</strong></div>
+        <div class="ck-item"><div class="ck-dot" style="background:#7ABFBF"></div><strong>Pacific/Oceanië</strong></div>
+        <div class="ck-item"><div class="ck-dot" style="background:#8A9BA8"></div><strong>Blends</strong></div>
+        <div class="ck-item"><div class="ck-dot" style="background:#6B3A2A"></div><strong>Gelimiteerd</strong></div>
+      </div>
+    </div>
+
+    <div class="results-bar">
+      <div class="results-count"><strong>175 producten</strong> — <span class="filter-active">2 filters actief</span></div>
+      <div class="sort-row">
+        <span class="sort-lbl">Sorteren:</span>
+        <select class="sort-sel">
+          <option>Populairste eerst</option>
+          <option>Hoogste rating</option>
+          <option>Prijs: laag–hoog</option>
+          <option>Prijs: hoog–laag</option>
+          <option>SCA-score</option>
+          <option>Nieuwste eerst</option>
+        </select>
+        <div class="view-tog">
+          <div class="vt-btn active" title="Raster">⊞</div>
+          <div class="vt-btn" title="Lijst">☰</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PRODUCT GRID ═══ -->
+    <div class="prod-grid" id="prod-grid-container">
+
+      <!-- ── Card 1: Capricornio – Hoeksche Branders ── -->
+      <div class="prod-card" onclick="openDetail('capricornio')">
+        <div class="card-photo" style="background:#3d1f0a">
+          <div class="card-photo-inner">
+            <img src="capricornio.jpg" alt="Hoeksche Branders Capricornio">
+          </div>
+          <div class="card-badges">
+            <div class="cb cb-sca">⭐ 87 SCA</div>
+            <div class="cb cb-new">BESTSELLER</div>
+          </div>
+          <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+          <div class="origin-dot" style="background:#A0744E"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand-row">
+            <div class="brand-avatar" style="background:#5a3010">H</div>
+            <span class="brand-nm">Hoeksche Branders</span>
+            <span class="brand-check">✓</span>
+          </div>
+          <div class="card-title">Capricornio</div>
+          <div class="card-origin">🇧🇷 Brazilië · 100% Arabica · Honey
+            <span class="origin-region" style="background:#A0744E">Zuid-Amerika</span>
+          </div>
+          <div class="card-flavors">
+            <span class="fl-tag">🥜 Hazelnoot</span>
+            <span class="fl-tag">🍑 Steenfruit</span>
+            <span class="fl-tag">🍯 Honey</span>
+          </div>
+          <div style="margin-bottom:8px">
+            <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau · 400–1300m</div>
+            <div class="roast-dots"><div class="rd on"></div><div class="rd on"></div><div class="rd on"></div><div class="rd"></div><div class="rd"></div></div>
+          </div>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rat-score">4,7</span>
+            <span class="rat-count">(64 reviews)</span>
+          </div>
+          <div class="card-footer">
+            <div class="price-wrap">
+              <div class="price-weight">250g · ook 500g en 1kg</div>
+              <div class="price-main">€14,50</div>
+              <div class="price-per">€58,00/kg</div>
+            </div>
+            <button class="btn-add" onclick="event.stopPropagation();addToCart('Capricornio')">+ Voeg toe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Card 2: Yellow Bourbon – Hoeksche Branders ── -->
+      <div class="prod-card" onclick="openDetail('yellow-bourbon')">
+        <div class="card-photo" style="background:#3d1f0a">
+          <div class="card-photo-inner">
+            <img src="yellow-Bourbon.jpg" alt="Hoeksche Branders Yellow Bourbon">
+          </div>
+          <div class="card-badges">
+            <div class="cb cb-sca">⭐ 85 SCA</div>
+          </div>
+          <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+          <div class="origin-dot" style="background:#A0744E"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand-row">
+            <div class="brand-avatar" style="background:#5a3010">H</div>
+            <span class="brand-nm">Hoeksche Branders</span>
+            <span class="brand-check">✓</span>
+          </div>
+          <div class="card-title">Yellow Bourbon</div>
+          <div class="card-origin">🇧🇷 Brazilië · 100% Arabica · Pulped Natural
+            <span class="origin-region" style="background:#A0744E">Zuid-Amerika</span>
+          </div>
+          <div class="card-flavors">
+            <span class="fl-tag">🍫 Melk chocolade</span>
+            <span class="fl-tag">🍦 Karamel</span>
+          </div>
+          <div style="margin-bottom:8px">
+            <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau · 1100–1500m</div>
+            <div class="roast-dots"><div class="rd on"></div><div class="rd on"></div><div class="rd on"></div><div class="rd"></div><div class="rd"></div></div>
+          </div>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rat-score">4,6</span>
+            <span class="rat-count">(41 reviews)</span>
+          </div>
+          <div class="card-footer">
+            <div class="price-wrap">
+              <div class="price-weight">250g · ook 500g en 1kg</div>
+              <div class="price-main">€13,50</div>
+              <div class="price-per">€54,00/kg</div>
+            </div>
+            <button class="btn-add" onclick="event.stopPropagation();addToCart('Yellow Bourbon')">+ Voeg toe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Card 3: Argote – Hoeksche Branders ── -->
+      <div class="prod-card" onclick="openDetail('argote')">
+        <div class="card-photo" style="background:#3d1f0a">
+          <div class="card-photo-inner">
+            <img src="argote.jpg" alt="Hoeksche Branders Argote">
+          </div>
+          <div class="card-badges">
+            <div class="cb cb-sca">⭐ 88 SCA</div>
+          </div>
+          <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+          <div class="origin-dot" style="background:#A0744E"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand-row">
+            <div class="brand-avatar" style="background:#5a3010">H</div>
+            <span class="brand-nm">Hoeksche Branders</span>
+            <span class="brand-check">✓</span>
+          </div>
+          <div class="card-title">Argote</div>
+          <div class="card-origin">🇨🇴 Colombia · 100% Arabica · Fully Washed
+            <span class="origin-region" style="background:#A0744E">Zuid-Amerika</span>
+          </div>
+          <div class="card-flavors">
+            <span class="fl-tag">🍎 Appelcider</span>
+            <span class="fl-tag">🥜 Hazelnoot</span>
+          </div>
+          <div style="margin-bottom:8px">
+            <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau · 1900–2200m</div>
+            <div class="roast-dots"><div class="rd on"></div><div class="rd on"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>
+          </div>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rat-score">4,8</span>
+            <span class="rat-count">(57 reviews)</span>
+          </div>
+          <div class="card-footer">
+            <div class="price-wrap">
+              <div class="price-weight">250g · ook 500g en 1kg</div>
+              <div class="price-main">€15,50</div>
+              <div class="price-per">€62,00/kg</div>
+            </div>
+            <button class="btn-add" onclick="event.stopPropagation();addToCart('Argote')">+ Voeg toe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Card 4: Huehuetenango – Hoeksche Branders ── -->
+      <div class="prod-card" onclick="openDetail('huehuetenango')">
+        <div class="card-photo" style="background:#3d1f0a">
+          <div class="card-photo-inner">
+            <img src="huehuetenango.jpg" alt="Hoeksche Branders Huehuetenango">
+          </div>
+          <div class="card-badges">
+            <div class="cb cb-sca">⭐ 87 SCA</div>
+          </div>
+          <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+          <div class="origin-dot" style="background:#6BAA78"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand-row">
+            <div class="brand-avatar" style="background:#5a3010">H</div>
+            <span class="brand-nm">Hoeksche Branders</span>
+            <span class="brand-check">✓</span>
+          </div>
+          <div class="card-title">Huehuetenango</div>
+          <div class="card-origin">🇬🇹 Guatemala · Fully Washed
+            <span class="origin-region" style="background:#6BAA78;color:#1a3a1a">Centraal-Amerika</span>
+          </div>
+          <div class="card-flavors">
+            <span class="fl-tag">🍋 Citrus</span>
+            <span class="fl-tag">🍎 Appel</span>
+            <span class="fl-tag">🌸 Bloemig</span>
+          </div>
+          <div style="margin-bottom:8px">
+            <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau</div>
+            <div class="roast-dots"><div class="rd on"></div><div class="rd on"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>
+          </div>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rat-score">4,7</span>
+            <span class="rat-count">(38 reviews)</span>
+          </div>
+          <div class="card-footer">
+            <div class="price-wrap">
+              <div class="price-weight">250g · ook 500g en 1kg</div>
+              <div class="price-main">€16,50</div>
+              <div class="price-per">€66,00/kg</div>
+            </div>
+            <button class="btn-add" onclick="event.stopPropagation();addToCart('Huehuetenango')">+ Voeg toe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Card 5: Blend – Hoeksche Branders ── -->
+      <div class="prod-card" onclick="openDetail('blend')">
+        <div class="card-photo" style="background:#3d1f0a">
+          <div class="card-photo-inner">
+            <img src="blend.jpg" alt="Hoeksche Branders Blend">
+          </div>
+          <div class="card-badges">
+            <div class="cb cb-sca">⭐ 85 SCA</div>
+          </div>
+          <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+          <div class="origin-dot" style="background:#8A9BA8"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand-row">
+            <div class="brand-avatar" style="background:#5a3010">H</div>
+            <span class="brand-nm">Hoeksche Branders</span>
+            <span class="brand-check">✓</span>
+          </div>
+          <div class="card-title">Blend</div>
+          <div class="card-origin">🌍 Huismengsel · Meerdere herkomsten
+            <span class="origin-region" style="background:#8A9BA8">Blend</span>
+          </div>
+          <div class="card-flavors">
+            <span class="fl-tag">🍫 Chocolade</span>
+            <span class="fl-tag">🥜 Nootachtig</span>
+            <span class="fl-tag">🍦 Karamel</span>
+          </div>
+          <div style="margin-bottom:8px">
+            <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau</div>
+            <div class="roast-dots"><div class="rd on"></div><div class="rd on"></div><div class="rd on"></div><div class="rd"></div><div class="rd"></div></div>
+          </div>
+          <div class="card-rating">
+            <span class="stars">★★★★½</span>
+            <span class="rat-score">4,5</span>
+            <span class="rat-count">(29 reviews)</span>
+          </div>
+          <div class="card-footer">
+            <div class="price-wrap">
+              <div class="price-weight">250g · ook 500g en 1kg</div>
+              <div class="price-main">€12,50</div>
+              <div class="price-per">€50,00/kg</div>
+            </div>
+            <button class="btn-add" onclick="event.stopPropagation();addToCart('Blend')">+ Voeg toe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Card 6: Swiss Water – Hoeksche Branders ── -->
+      <div class="prod-card" onclick="openDetail('swiss-water')">
+        <div class="card-photo" style="background:#3d1f0a">
+          <div class="card-photo-inner">
+            <img src="swiss-water.jpg" alt="Hoeksche Branders Swiss Water">
+          </div>
+          <div class="card-badges">
+            <div class="cb cb-sca">⭐ 84 SCA</div>
+            <div class="cb cb-bio">🌱 Cafeïnevrij</div>
+          </div>
+          <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+          <div class="origin-dot" style="background:#8A9BA8"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand-row">
+            <div class="brand-avatar" style="background:#5a3010">H</div>
+            <span class="brand-nm">Hoeksche Branders</span>
+            <span class="brand-check">✓</span>
+          </div>
+          <div class="card-title">Swiss Water Decaf</div>
+          <div class="card-origin">🌍 Meerdere herkomsten · Swiss Water Process
+            <span class="origin-region" style="background:#8A9BA8">Decaf</span>
+          </div>
+          <div class="card-flavors">
+            <span class="fl-tag">🍫 Chocolade</span>
+            <span class="fl-tag">🍦 Karamel</span>
+            <span class="fl-tag">🥜 Nootachtig</span>
+          </div>
+          <div style="margin-bottom:8px">
+            <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau</div>
+            <div class="roast-dots"><div class="rd on"></div><div class="rd on"></div><div class="rd on"></div><div class="rd"></div><div class="rd"></div></div>
+          </div>
+          <div class="card-rating">
+            <span class="stars">★★★★½</span>
+            <span class="rat-score">4,5</span>
+            <span class="rat-count">(33 reviews)</span>
+          </div>
+          <div class="card-footer">
+            <div class="price-wrap">
+              <div class="price-weight">250g · ook 500g en 1kg</div>
+              <div class="price-main">€14,50</div>
+              <div class="price-per">€58,00/kg</div>
+            </div>
+            <button class="btn-add" onclick="event.stopPropagation();addToCart('Swiss Water Decaf')">+ Voeg toe</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /prod-grid -->
+
+    <!-- ── Extra 3 cards (hidden until button click) ── -->
+    <div id="extra-products" style="display:none">
+      <div class="prod-grid" style="margin-top:20px">
+
+        <!-- ── Card 7: Blawan Estate ── -->
+        <div class="prod-card" onclick="openDetail('blawan')">
+          <div class="card-photo" style="background:#2a1a08">
+            <div class="card-photo-inner">
+              <img src="blawanEstate-2.jpg" alt="Blawan Estate">
+            </div>
+            <div class="card-badges">
+              <div class="cb cb-sca">⭐ 87 SCA</div>
+            </div>
+            <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+            <div class="origin-dot" style="background:#7B5E3A"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-brand-row">
+              <div class="brand-avatar" style="background:#e8a020">G</div>
+              <span class="brand-nm">Giraffe Coffee</span>
+              <span class="brand-check">✓</span>
+            </div>
+            <div class="card-title">Blawan Estate</div>
+            <div class="card-origin">🇮🇩 Indonesië · Java · Natural
+              <span class="origin-region" style="background:#7B5E3A">Azië</span>
+            </div>
+            <div class="card-flavors">
+              <span class="fl-tag">🌿 Kruidig</span>
+              <span class="fl-tag">🍫 Pure chocolade</span>
+              <span class="fl-tag">🌰 Aarde</span>
+            </div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau · 900–1500m</div>
+              <div class="roast-dots"><div class="rd on"></div><div class="rd on"></div><div class="rd on"></div><div class="rd on"></div><div class="rd"></div></div>
+            </div>
+            <div class="card-rating">
+              <span class="stars">★★★★½</span>
+              <span class="rat-score">4,5</span>
+              <span class="rat-count">(29 reviews)</span>
+            </div>
+            <div class="card-footer">
+              <div class="price-wrap">
+                <div class="price-weight">250g · ook 500g en 1kg</div>
+                <div class="price-main">€14,00</div>
+                <div class="price-per">€56,00/kg</div>
+              </div>
+              <button class="btn-add" onclick="event.stopPropagation();addToCart('Blawan Estate')">+ Voeg toe</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Card 8: Latin America ── -->
+        <div class="prod-card" onclick="openDetail('latinamerica')">
+          <div class="card-photo" style="background:#1e2e10">
+            <div class="card-photo-inner">
+              <img src="latinamerica-1.jpg" alt="Latin America">
+            </div>
+            <div class="card-badges">
+              <div class="cb cb-sca">⭐ 86 SCA</div>
+              <div class="cb cb-bio">🌱 BIO</div>
+            </div>
+            <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+            <div class="origin-dot" style="background:#5C8A3C"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-brand-row">
+              <div class="brand-avatar" style="background:#e8a020">G</div>
+              <span class="brand-nm">Giraffe Coffee</span>
+              <span class="brand-check">✓</span>
+            </div>
+            <div class="card-title">Latin America</div>
+            <div class="card-origin">🌎 Midden- & Zuid-Amerika · Blend · Washed
+              <span class="origin-region" style="background:#5C8A3C">Blend</span>
+            </div>
+            <div class="card-flavors">
+              <span class="fl-tag">🍋 Citrus</span>
+              <span class="fl-tag">🍎 Appel</span>
+              <span class="fl-tag">🍦 Karamel</span>
+            </div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau · 1200–1800m</div>
+              <div class="roast-dots"><div class="rd on"></div><div class="rd on"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>
+            </div>
+            <div class="card-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rat-score">4,7</span>
+              <span class="rat-count">(44 reviews)</span>
+            </div>
+            <div class="card-footer">
+              <div class="price-wrap">
+                <div class="price-weight">250g · ook 500g en 1kg</div>
+                <div class="price-main">€13,00</div>
+                <div class="price-per">€52,00/kg</div>
+              </div>
+              <button class="btn-add" onclick="event.stopPropagation();addToCart('Latin America')">+ Voeg toe</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Card 9: Organic Blend ── -->
+        <div class="prod-card" onclick="openDetail('organicblend')">
+          <div class="card-photo" style="background:#1a2a1a">
+            <div class="card-photo-inner">
+              <img src="organicblend_1.jpg" alt="Organic Blend">
+            </div>
+            <div class="card-badges">
+              <div class="cb cb-sca">⭐ 85 SCA</div>
+              <div class="cb cb-bio">♻️ Fairtrade</div>
+            </div>
+            <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+            <div class="origin-dot" style="background:#4A7A4A"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-brand-row">
+              <div class="brand-avatar" style="background:#e8a020">G</div>
+              <span class="brand-nm">Giraffe Coffee</span>
+              <span class="brand-check">✓</span>
+            </div>
+            <div class="card-title">Organic Blend</div>
+            <div class="card-origin">🌍 Meerdere herkomsten · 100% Biologisch
+              <span class="origin-region" style="background:#4A7A4A">Biologisch</span>
+            </div>
+            <div class="card-flavors">
+              <span class="fl-tag">🍫 Cacao</span>
+              <span class="fl-tag">🥜 Walnoot</span>
+              <span class="fl-tag">🍯 Honing</span>
+            </div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau · 1000–1600m</div>
+              <div class="roast-dots"><div class="rd on"></div><div class="rd on"></div><div class="rd on"></div><div class="rd"></div><div class="rd"></div></div>
+            </div>
+            <div class="card-rating">
+              <span class="stars">★★★★½</span>
+              <span class="rat-score">4,6</span>
+              <span class="rat-count">(38 reviews)</span>
+            </div>
+            <div class="card-footer">
+              <div class="price-wrap">
+                <div class="price-weight">250g · ook 500g en 1kg</div>
+                <div class="price-main">€14,00</div>
+                <div class="price-per">€56,00/kg</div>
+              </div>
+              <button class="btn-add" onclick="event.stopPropagation();addToCart('Organic Blend')">+ Voeg toe</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /extra prod-grid -->
+    </div><!-- /extra-products -->
+
+    <div style="text-align:center;margin-top:28px" id="load-more-wrap">
+      <button id="load-more-btn" class="btn" onclick="loadMoreProducts()" style="background:#fff;border:2px solid var(--border);color:var(--mid);height:46px;padding:0 28px;border-radius:11px;font-size:14px;font-weight:600;cursor:pointer">
+        Laad meer producten (166 resterend) ↓
+      </button>
+    </div>
+  </main>
+</div><!-- /page-layout -->
+</div>
+
+<!-- ═══ PRODUCT DETAIL PANEL ═══ -->
+<div id="detail-panel">
+  <button class="back-btn" style="padding:16px 24px 0" onclick="closeDetail()">← Terug naar overzicht</button>
+  <div class="dp-grid" id="dp-inner"><!-- filled by JS --></div>
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab(this,'t-reviews')">⭐ Reviews</div>
+    <div class="tab" onclick="switchTab(this,'t-info')">📋 Productinfo</div>
+    <div class="tab" onclick="switchTab(this,'t-roastery')">🏭 Over de branderij</div>
+    <div class="tab" onclick="switchTab(this,'t-brew')">☕ Brouwadvies</div>
+  </div>
+  <div id="t-reviews" class="tab-content">
+    <div class="rv-summary">
+      <div style="text-align:center">
+        <div class="rv-big">4,8</div>
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-cnt">143 reviews</div>
+      </div>
+      <div>
+        <div class="bar-row"><span class="bar-lbl">5★</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><span class="bar-pct">72%</span></div>
+        <div class="bar-row"><span class="bar-lbl">4★</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-pct">20%</span></div>
+        <div class="bar-row"><span class="bar-lbl">3★</span><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div><span class="bar-pct">6%</span></div>
+        <div class="bar-row"><span class="bar-lbl">2★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span class="bar-pct">2%</span></div>
+        <div class="bar-row"><span class="bar-lbl">1★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-pct">0%</span></div>
+      </div>
+    </div>
+    <div class="rv-filter-row">
+      <span style="font-size:12.5px;font-weight:600;color:var(--muted)">Filter:</span>
+      <button class="rvf-btn active">Alle</button>
+      <button class="rvf-btn">5 ster</button>
+      <button class="rvf-btn">4 ster</button>
+      <button class="rvf-btn">Met foto</button>
+      <button class="rvf-btn">Filter-koffie</button>
+      <button class="rvf-btn">Meest behulpzaam</button>
+    </div>
+    <div class="rv-card">
+      <div class="rv-hdr">
+        <div style="display:flex;align-items:center;gap:9px">
+          <div class="rv-av">JV</div>
+          <div><div class="rv-nm">Joris V.</div><div class="rv-meta">Amsterdam · 47 reviews · 3 dagen geleden</div></div>
+        </div>
+        <div style="text-align:right">
+          <div class="stars" style="font-size:13px">★★★★★</div>
+          <div class="rv-verified">✓ Geverifieerde koper</div>
+        </div>
+      </div>
+      <p class="rv-body"><strong>Uitzonderlijke fruitigheid, precies zoals beschreven.</strong> Ik maak deze koffie als pour-over op mijn Hario V60 en de aardbeientonen zijn echt opvallend aanwezig. De geur bij het ingieten is al een belevenis. Versheid was perfect — roosttdatum was 4 dagen oud bij ontvangst. Snelle levering ook.</p>
+      <div class="rv-ftags"><span class="rv-ftag">Pour-over</span><span class="rv-ftag">Hario V60</span><span class="rv-ftag">Fruitig</span></div>
+      <div class="rv-helpful">
+        <span>Behulpzaam?</span>
+        <button class="helpful-btn">👍 Ja (18)</button>
+        <button class="helpful-btn">👎 Nee (1)</button>
+      </div>
+      <div class="roastery-reply">
+        <div class="rr-hdr">🏭 Reactie van Friedhats Coffee</div>
+        <p class="rr-body">Dank je Joris! Deze batch is inderdaad bijzonder — we hebben hem 7 dagen laten rusten na het roosten wat de fruitigheid nog meer naar voren brengt. Geniet ervan!</p>
+      </div>
+    </div>
+    <div class="rv-card">
+      <div class="rv-hdr">
+        <div style="display:flex;align-items:center;gap:9px">
+          <div class="rv-av" style="background:var(--gold-l);color:var(--gold-d)">SB</div>
+          <div><div class="rv-nm">Sara B.</div><div class="rv-meta">Utrecht · 12 reviews · 2 weken geleden</div></div>
+        </div>
+        <div style="text-align:right">
+          <div class="stars" style="font-size:13px">★★★★☆</div>
+          <div class="rv-verified">✓ Geverifieerde koper</div>
+        </div>
+      </div>
+      <p class="rv-body">Heerlijke koffie. Ik heb de jasmiinnuance minder goed kunnen proeven dan verwacht — mogelijk door mijn harde water (280ppm). Als filterkoffie absoluut 5 sterren. Als espresso minder geschikt.</p>
+      <div class="rv-ftags"><span class="rv-ftag">Aeropress</span><span class="rv-ftag">Hard water tip</span></div>
+      <div class="rv-helpful"><button class="helpful-btn">👍 Ja (8)</button><button class="helpful-btn">👎 Nee (0)</button></div>
+    </div>
+    <div style="text-align:center;margin-top:18px">
+      <button style="font-size:12.5px;font-weight:600;color:var(--g600);background:var(--g50);border:1.5px solid var(--g100);padding:9px 22px;border-radius:9px;cursor:pointer">Laad alle 143 reviews →</button>
+    </div>
+  </div>
+  <div id="t-info" class="tab-content" style="display:none">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
+      <div>
+        <h3 style="font-family:var(--ff-d);margin-bottom:11px;font-size:18px">Productdetails</h3>
+        <table style="width:100%;font-size:13px;border-collapse:collapse">
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:7px 0;color:var(--muted)">Variëteit</td><td style="font-weight:600">Heirloom / Kurume</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:7px 0;color:var(--muted)">Boerderij</td><td style="font-weight:600">Kochere Washing Station</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:7px 0;color:var(--muted)">Hoogte</td><td style="font-weight:600">1.800 – 2.100 m</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:7px 0;color:var(--muted)">Oogst</td><td style="font-weight:600">Oktober – December 2024</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:7px 0;color:var(--muted)">Roosttdatum</td><td style="font-weight:600;color:var(--g600)">🟢 Max. 3 werkdagen geleden</td></tr>
+          <tr><td style="padding:7px 0;color:var(--muted)">SCA-score</td><td style="font-weight:600">92,0 punten</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3 style="font-family:var(--ff-d);margin-bottom:11px;font-size:18px">Herkomst & Duurzaamheid</h3>
+        <p style="font-size:13.5px;color:var(--mid);line-height:1.68">Directe inkoop bij de Kochere Washing Station, Gedeo Zone. Friedhats betaalt 30% boven marktprijs als bijdrage aan schoolprogramma's in de regio. Verpakking 100% recyclebaar.</p>
+        <div style="margin-top:12px;display:flex;gap:7px;flex-wrap:wrap">
+          <span class="tag tag-g">🌱 Biologisch</span>
+          <span class="tag tag-gold">☀️ Direct Trade</span>
+          <span class="tag tag-g">♻️ Recyclebaar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="t-roastery" class="tab-content" style="display:none;padding:24px 30px">
+    <div style="background:linear-gradient(150deg,var(--g900),#253d1a);border-radius:14px;padding:28px 32px;color:#fff;position:relative;overflow:hidden">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:150px;opacity:.05">☕</div>
+      <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px">🏭 Branderij profiel</div>
+      <div style="font-family:var(--ff-d);font-size:26px;font-weight:700;margin-bottom:5px">Friedhats Coffee</div>
+      <div style="color:rgba(255,255,255,.55);font-size:13px;margin-bottom:14px">📍 Amsterdam-Noord, NDSM Wharf · Opgericht 2013</div>
+      <p style="color:rgba(255,255,255,.72);font-size:13.5px;line-height:1.65;max-width:520px">Friedhats is opgericht door Sebastian Spindler en Richard Nieland. Vanuit hun roastery in Amsterdam-Noord roosteren ze wekelijks kleine batches. Ze bezoeken persoonlijk hun boerderijen in Ethiopië, Colombia en Guatemala.</p>
+      <div style="display:flex;gap:20px;margin-top:18px">
+        <div style="text-align:center"><div style="font-size:20px;font-weight:800;color:#fff">12</div><div style="font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em">Producten</div></div>
+        <div style="text-align:center"><div style="font-size:20px;font-weight:800;color:#fff">4,8★</div><div style="font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em">Gem. rating</div></div>
+        <div style="text-align:center"><div style="font-size:20px;font-weight:800;color:#fff">847</div><div style="font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em">Reviews</div></div>
+        <div style="text-align:center"><div style="font-size:20px;font-weight:800;color:#fff">2013</div><div style="font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em">Opgericht</div></div>
+      </div>
+    </div>
+  </div>
+  <div id="t-brew" class="tab-content" style="display:none;padding:24px 30px">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <div style="background:var(--cream);border-radius:11px;padding:18px"><div style="font-size:22px;margin-bottom:7px">🫖</div><div style="font-weight:700;margin-bottom:4px;font-size:14px">Pour-over (aanbevolen)</div><div style="font-size:12.5px;color:var(--muted)">Ratio 1:15 · Temp 93°C · Maling medium-fijn · 3–4 min</div></div>
+      <div style="background:var(--cream);border-radius:11px;padding:18px"><div style="font-size:22px;margin-bottom:7px">🏺</div><div style="font-weight:700;margin-bottom:4px;font-size:14px">Aeropress</div><div style="font-size:12.5px;color:var(--muted)">Ratio 1:12 · Temp 85°C · Persduur 30s · Omgekeerde methode</div></div>
+      <div style="background:var(--cream);border-radius:11px;padding:18px"><div style="font-size:22px;margin-bottom:7px">☕</div><div style="font-weight:700;margin-bottom:4px;font-size:14px">Espresso</div><div style="font-size:12.5px;color:var(--muted)">Ratio 1:2,5 · Temp 91°C · Extractie 28s · Minder geschikt</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROASTERIES ═══ -->
+<section id="roasteries" style="background:var(--cream-d)">
+<div class="container">
+  <div class="section-hdr">
+    <div>
+      <h2 class="section-title">🏭 Ontdek onze branderijen</h2>
+      <div class="section-sub">48 gecureerde specialty branderijen — persoonlijk geselecteerd op The Roast Standard</div>
+    </div>
+    <a href="#" class="section-link">Alle branderijen →</a>
+  </div>
+  <div class="roastery-grid">
+    <div class="roastery-card" onclick="openRoastery('friedhats')">
+      <div class="rc-header">
+        <div class="rc-header-bg" style="background:linear-gradient(135deg,#1e3a1e,#3a7d3c)"></div>
+        <div class="rc-featured">Uitgelicht</div>
+        <div class="rc-logo" style="background:linear-gradient(135deg,#1e3a1e,#3a7d3c)">☕</div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-name">Friedhats Coffee</div>
+        <div class="rc-city">📍 Amsterdam · sinds 2013</div>
+        <div class="rc-rating"><span class="stars" style="font-size:11px">★★★★★</span> 4,8 <span style="font-size:10px;color:var(--muted)">(847 reviews)</span></div>
+        <div class="rc-tag">☀️ Direct Trade · 12 producten</div>
+      </div>
+      <div class="rc-cta"><button class="rc-cta-btn">Bekijk branderij →</button></div>
+    </div>
+    <div class="roastery-card" onclick="openRoastery('bocca')">
+      <div class="rc-header">
+        <div class="rc-header-bg" style="background:linear-gradient(135deg,#5a3a2a,#a06040)"></div>
+        <div class="rc-logo" style="background:linear-gradient(135deg,#5a3a2a,#a06040)">🫘</div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-name">Bocca Coffee</div>
+        <div class="rc-city">📍 Amsterdam · sinds 2009</div>
+        <div class="rc-rating"><span class="stars" style="font-size:11px">★★★★½</span> 4,6 <span style="font-size:10px;color:var(--muted)">(623 reviews)</span></div>
+        <div class="rc-tag">🌱 Biologisch · 9 producten</div>
+      </div>
+      <div class="rc-cta"><button class="rc-cta-btn">Bekijk branderij →</button></div>
+    </div>
+    <div class="roastery-card" onclick="openRoastery('manmetbril')">
+      <div class="rc-header">
+        <div class="rc-header-bg" style="background:linear-gradient(135deg,#2a3a1a,#4a6a2a)"></div>
+        <div class="rc-logo" style="background:linear-gradient(135deg,#2a3a1a,#4a6a2a)">🌿</div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-name">Man Met Bril</div>
+        <div class="rc-city">📍 Rotterdam · sinds 2012</div>
+        <div class="rc-rating"><span class="stars" style="font-size:11px">★★★★★</span> 4,7 <span style="font-size:10px;color:var(--muted)">(412 reviews)</span></div>
+        <div class="rc-tag">✨ Specialty · 7 producten</div>
+      </div>
+      <div class="rc-cta"><button class="rc-cta-btn">Bekijk branderij →</button></div>
+    </div>
+    <div class="roastery-card" onclick="openRoastery('whitelabel')">
+      <div class="rc-header">
+        <div class="rc-header-bg" style="background:linear-gradient(135deg,#3a1a5a,#6a3a9a)"></div>
+        <div class="rc-logo" style="background:linear-gradient(135deg,#3a1a5a,#6a3a9a)">✨</div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-name">White Label Coffee</div>
+        <div class="rc-city">📍 Amsterdam · sinds 2011</div>
+        <div class="rc-rating"><span class="stars" style="font-size:11px">★★★★★</span> 4,9 <span style="font-size:10px;color:var(--muted)">(1.204 reviews)</span></div>
+        <div class="rc-tag">🏆 Top-rated · 11 producten</div>
+      </div>
+      <div class="rc-cta"><button class="rc-cta-btn">Bekijk branderij →</button></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ ROASTERY DETAIL PANEL ═══ -->
+<div id="roastery-panel">
+  <button class="rp-back-btn" onclick="closeRoastery()">← Terug naar branderijen</button>
+  <div id="rp-inner"></div>
+</div>
+
+<!-- ═══ QUIZ CTA ═══ -->
+<div id="quiz" class="container">
+  <div class="quiz-cta">
+    <div class="qc-bg">☕</div>
+    <div>
+      <div class="qc-eyebrow">✨ Gepersonaliseerd advies</div>
+      <h2 class="qc-title">Weet jij al welke koffie bij jou past?</h2>
+      <p class="qc-sub">Beantwoord 5 vragen over smaak, bereiding en koffiemachine. Wij matchen je met de perfecte bonen uit ons gecureerde aanbod.</p>
+    </div>
+    <div class="qc-side">
+      <button class="btn-quiz">Start de smaaktest →</button>
+      <div class="qc-note">Gratis · 2 minuten · Direct resultaat</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="nav-logo" style="font-size:20px">
+        <div class="logo-mark" style="width:30px;height:30px;font-size:15px">☕</div>
+        Roast<span>Select</span>
+      </div>
+      <p>De specialty koffiemarktplaats van onafhankelijke branderijen. Vers, transparant, gecureerd op The Roast Standard.</p>
+      <div class="footer-socials">
+        <div class="soc-btn">📸</div><div class="soc-btn">🐦</div>
+        <div class="soc-btn">💼</div><div class="soc-btn">▶️</div>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Koffiebonen</h4>
+        <a href="#">Alle bonen</a><a href="#">Ethiopisch</a><a href="#">Colombia</a>
+        <a href="#">Nieuw aanbod</a><a href="#">Top beoordeeld</a>
+      </div>
+      <div class="footer-col">
+        <h4>Branderijen</h4>
+        <a href="#">Alle branderijen</a><a href="#">Amsterdam</a>
+        <a href="#">Utrecht</a><a href="#">Word aanbieder</a>
+      </div>
+      <div class="footer-col">
+        <h4>Service</h4>
+        <a href="#">Hoe werkt het?</a><a href="#">The Roast Standard</a>
+        <a href="#">Verzending</a><a href="#">Abonnement</a><a href="#">Klantenservice</a>
+      </div>
+      <div class="footer-col">
+        <h4>Over ons</h4>
+        <a href="#">Over RoastSelect</a><a href="#">Werken bij</a>
+        <a href="#">Pers</a><a href="#">Privacy</a><a href="#">Voorwaarden</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 RoastSelect BV · KvK 12345678</span>
+    <div class="f-badges">
+      <div class="f-badge">🔒 SSL</div><div class="f-badge">💳 iDEAL</div>
+      <div class="f-badge">💳 VISA/MC</div><div class="f-badge">🏦 PayPal</div>
+      <div class="f-badge">📦 DHL</div><div class="f-badge">🌱 CO₂ neutraal</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ CART DRAWER ═══ -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cd-hdr">
+    <div class="cd-title">🛒 Winkelwagen <span style="font-size:13px;font-weight:400;color:var(--muted)">(2 producten)</span></div>
+    <div class="cd-close" onclick="closeCart()">✕</div>
+  </div>
+  <div class="cd-items">
+    <div class="cd-item">
+      <div class="cd-img" style="background:#C9724A">☕</div>
+      <div class="cd-info">
+        <div class="cd-name">Yirgacheffe Natural G1</div>
+        <div class="cd-brand">Friedhats Coffee · 250g</div>
+        <div class="cd-fresh">🟢 Vers geroosterd · 3 dg oud</div>
+        <div class="cd-controls">
+          <div class="qty-btn" onclick="updateQty(this,-1)">−</div>
+          <div class="qty-val">1</div>
+          <div class="qty-btn" onclick="updateQty(this,1)">+</div>
+          <span style="font-size:11px;color:var(--muted);margin-left:4px">× €17,50</span>
+        </div>
+      </div>
+      <div class="cd-price">€17,50</div>
+    </div>
+    <div class="cd-item">
+      <div class="cd-img" style="background:#A0744E">🫘</div>
+      <div class="cd-info">
+        <div class="cd-name">Colombia Huila Washed</div>
+        <div class="cd-brand">Bocca Coffee · 500g</div>
+        <div class="cd-fresh">🟢 Vers geroosterd · 2 dg oud</div>
+        <div class="cd-controls">
+          <div class="qty-btn" onclick="updateQty(this,-1)">−</div>
+          <div class="qty-val">1</div>
+          <div class="qty-btn" onclick="updateQty(this,1)">+</div>
+          <span style="font-size:11px;color:var(--muted);margin-left:4px">× €15,50</span>
+        </div>
+      </div>
+      <div class="cd-price">€15,50</div>
+    </div>
+    <div style="background:var(--g50);border:1px dashed #81c784;border-radius:9px;padding:11px 13px;font-size:12.5px;color:var(--g700)">
+      🎁 Nog <strong>€7,00</strong> tot gratis verzending!
+      <div style="margin-top:6px;background:#fff;border-radius:5px;height:7px;overflow:hidden">
+        <div style="width:75%;height:100%;background:var(--g500);border-radius:5px"></div>
+      </div>
+    </div>
+  </div>
+  <div class="cd-footer">
+    <div class="cd-row"><span>Subtotaal</span><span>€33,00</span></div>
+    <div class="cd-row"><span>Verzending</span><span style="color:var(--g600)">Gratis ✓</span></div>
+    <div class="cd-total"><span>Totaal</span><span>€33,00</span></div>
+    <button class="btn-checkout">🔒 Afrekenen →</button>
+    <div class="cd-pay-note">💳 iDEAL · Creditcard · PayPal · Klarna</div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span>✓</span><span id="toastMsg">Toegevoegd aan winkelwagen</span>
+</div>
+
+<!-- ═══ PRODUCT DATA & INTERACTIONS ═══ -->
+<script>
+// ── Product data (Roast Standard compliant) ─────────────────────────────
+const PRODUCTS = {
+  yirg: {
+    id:'yirg', bg:'#C9724A', region:'Oost-Afrika', icon:'☕',
+    brand:'Friedhats Coffee', brandInitial:'F', brandColor:'#1e3a1e',
+    brandCity:'Amsterdam-Noord', brandYear:2013, brandScore:4.8, brandReviews:847,
+    name:'Yirgacheffe Natural Grade 1',
+    flag:'🇪🇹', country:'Ethiopië', region_full:'Yirgacheffe, Gedeo Zone',
+    processing:'Natural (ongewassen)', roastLevel:2, roastLabel:'Light',
+    sca:92.0, variety:'Heirloom / Kurume',
+    farm:'Kochere Washing Station', altitude:'1.800–2.100 m', harvest:'Okt–Dec 2024',
+    brewing:['🫖 Filter','🍶 Pour-over','🏺 Aeropress'],
+    flavors:['🍓 Aardbeien','🌸 Jasmijn','🍑 Perzik','🫐 Bosbes','🍋 Bergamot'],
+    certs:['🌱 Biologisch','☀️ Direct Trade','♻️ Recyclebaar'],
+    tags:['🏆 Bestseller'],
+    rating:4.8, reviews:143,
+    roastDate:'3 werkdagen geleden',
+    desc:'Een uitzonderlijke single-origin uit het iconische Yirgacheffe-district. De natural verwerking geeft deze koffie een intense fruitigheid — aardbeien en jasmijn in de neus, perzik en bosbes in de mond. Geteeld door kleine familieboerderijen op ruim 1.800 meter hoogte, verwerkt op de Kochere Washing Station.\n\nFriedhats koopt deze koffie direct in van de co-op en betaalt 30% boven marktprijs. Ideaal als pour-over of aeropress. Laat de bonen 5–7 dagen na roosten rusten voor de beste smaak.',
+    prices: {100:7.50, 250:17.50, 500:32.00, 1000:59.00},
+  },
+  colombia: {
+    id:'colombia', bg:'#A0744E', region:'Zuid-Amerika', icon:'🫘',
+    brand:'Bocca Coffee', brandInitial:'B', brandColor:'#5a3a2a',
+    brandCity:'Amsterdam', brandYear:2009, brandScore:4.6, brandReviews:623,
+    name:'Colombia Huila Washed',
+    flag:'🇨🇴', country:'Colombia', region_full:'Huila, Suaza',
+    processing:'Washed (gewassen)', roastLevel:3, roastLabel:'Medium',
+    sca:88.0, variety:'Caturra / Colombia',
+    farm:'Finca La Divisa', altitude:'1.600–1.900 m', harvest:'Mrt–Jun 2024',
+    brewing:['☕ Espresso','🫖 Filter','🏺 Aeropress'],
+    flavors:['🍫 Chocolade','🍒 Rode bessen','🥜 Hazelnoot','🍊 Sinaasappelschil'],
+    certs:['☀️ Direct Trade','♻️ Recyclebaar'],
+    tags:['❤️ Klantenlievelingen'],
+    rating:4.6, reviews:89,
+    roastDate:'2 werkdagen geleden',
+    desc:'Een klassieke Colombian washed — gebalanceerd, complex en veelzijdig. Finca La Divisa ligt in de bergen van Huila, bekend als Colombia\'s meest gerenommeerde koffiegebied. De washed processing accentueert de schone, heldere zuurgraad en de rijke chocoladetonen.\n\nGeschikt voor zowel espresso als filter. Als espresso geeft hij een romige body met chocolade en rode bessen. Als filterkoffie open en helder met een fruitige afdronk.',
+    prices: {250:15.50, 500:28.50},
+  },
+  guatemala: {
+    id:'guatemala', bg:'#6BAA78', region:'Centraal-Amerika', icon:'🌿',
+    brand:'White Label Coffee', brandInitial:'W', brandColor:'#3a1a5a',
+    brandCity:'Amsterdam', brandYear:2011, brandScore:4.9, brandReviews:1204,
+    name:'Guatemala Huehuetenango Washed',
+    flag:'🇬🇹', country:'Guatemala', region_full:'Huehuetenango, La Libertad',
+    processing:'Washed (gewassen)', roastLevel:1, roastLabel:'Light',
+    sca:90.0, variety:'Bourbon / Caturra',
+    farm:'Comunidad La Libertad', altitude:'1.500–1.700 m', harvest:'Jan–Mar 2025',
+    brewing:['🍶 Pour-over','🫖 Filter','🌊 Chemex'],
+    flavors:['🍋 Citrus','🍎 Groene appel','🌹 Roos','🍫 Witte chocolade','🍇 Druif'],
+    certs:['🌱 Biologisch','♻️ Recyclebaar'],
+    tags:['⭐ Top beoordeeld'],
+    rating:4.9, reviews:201,
+    roastDate:'1 werkdag geleden',
+    desc:'Guatemala Huehuetenango is een van de meest begeerde koffie-origins ter wereld — en dit lot bewijst waarom. De gemeenschapsboerderij La Libertad ligt op 1.500–1.700 meter, omgeven door wolvenwoud en nachtmist die de rijpingssnelheid vertraagt.\n\nHet resultaat is een licht geroosterde koffie met een bloemige elegantie: rozenwater, groene appel en een lange citrusafdronk. Ideaal voor chemex of pour-over bij 93°C.',
+    prices: {250:18.00, 500:33.00},
+  },
+  kenya: {
+    id:'kenya', bg:'#C9724A', region:'Oost-Afrika', icon:'☕',
+    brand:'Koffie Klassiek', brandInitial:'K', brandColor:'#5a3a1a',
+    brandCity:'Rotterdam', brandYear:2016, brandScore:4.7, brandReviews:312,
+    name:'Kenya AA Nyeri Double Washed',
+    flag:'🇰🇪', country:'Kenia', region_full:'Nyeri, Central Province',
+    processing:'Double Washed', roastLevel:2, roastLabel:'Light-Medium',
+    sca:87.0, variety:'SL28 / SL34',
+    farm:'Othaya FCS (Farmers Cooperative)', altitude:'1.700–1.900 m', harvest:'Nov–Jan 2024',
+    brewing:['🫖 Filter','🍶 Pour-over'],
+    flavors:['🍇 Cassis','🍊 Bloedsinaasappel','🍷 Wijnachtig','🍒 Kers'],
+    certs:['☀️ Direct Trade'],
+    tags:['🏅 TOP 10 Platform'],
+    rating:4.7, reviews:78,
+    roastDate:'5 werkdagen geleden',
+    desc:'De beroemde SL28 en SL34-variëteiten van Kenia staan bekend om hun explosieve fruitigheid en wijnachtige complexiteit. Dit lot van de Othaya Farmers Cooperative in Nyeri is dubbel gewassen, wat resulteert in een kristalheldere beker met intense cassis- en kerstonen.\n\nTypische Kenia-koffie: groot, gedurfd en onvergetelijk. Beste resultaten als pour-over of filterkoffie. Niet aanbevolen als espresso.',
+    prices: {250:19.50, 500:36.00},
+  },
+  geisha: {
+    id:'geisha', bg:'#6B3A2A', region:'Gelimiteerd', icon:'✨',
+    brand:'Speciaal Koffie', brandInitial:'S', brandColor:'#3a1a1a',
+    brandCity:'Utrecht', brandYear:2019, brandScore:4.8, brandReviews:145,
+    name:'Panama Geisha Honey — Microlot',
+    flag:'🇵🇦', country:'Panama', region_full:'Boquete, Chiriquí',
+    processing:'Honey Process (Red Honey)', roastLevel:1, roastLabel:'Light',
+    sca:94.0, variety:'Gesha (Ethiopische origine)',
+    farm:'Hacienda La Esmeralda', altitude:'1.600–1.800 m', harvest:'Mrt 2025',
+    brewing:['🍶 Pour-over','🌊 Chemex'],
+    flavors:['🍑 Mango','🌺 Hibiscus','🍯 Honing','🍊 Mandarijn','🌸 Jasmijn'],
+    certs:['✨ Microlot','🌱 Biologisch'],
+    tags:['💎 Ultra Premium','⚠️ Beperkt beschikbaar'],
+    rating:5.0, reviews:22,
+    roastDate:'1 werkdag geleden',
+    desc:'Geisha is het meest geroemde koffieras ter wereld, en dit microlot van Hacienda La Esmeralda in Panama\'s Boquete-regio vertegenwoordigt de absolute top. Met een SCA-score van 94,0 behoort dit lot tot de top 1% van alle specialty koffie ter wereld.\n\nDe red honey processing laat een deel van het vruchtvlees op de boon drogen, wat de tropische fruitigheid verder intensiveert. Hibiscus, mango en mandarijn domineren de smaakbeleving. Beschikbaar in beperkte hoeveelheden — max. 2 verpakkingen per klant.',
+    prices: {100:24.00, 250:55.00},
+  },
+  capricornio: {
+    id:'capricornio', photo:'capricornio.jpg', bg:'#3d1f0a', region:'Zuid-Amerika', icon:'🫘',
+    brand:'Hoeksche Branders', brandInitial:'H', brandColor:'#5a3010',
+    brandCity:'Hoeksche Waard', brandYear:2018, brandScore:4.7, brandReviews:164,
+    name:'Capricornio',
+    flag:'🇧🇷', country:'Brazilië', region_full:'100% Arabica',
+    processing:'Honey Process', roastLevel:3, roastLabel:'Medium',
+    sca:87.0, variety:'Arabica',
+    farm:'Capricornio Farm', altitude:'400–1.300 m', harvest:'Jun–Sep 2024',
+    brewing:['☕ Espresso','🫖 Filter','🏺 Aeropress'],
+    flavors:['🥜 Hazelnoot','🍑 Steenfruit','🍯 Honing','🍫 Chocolade'],
+    certs:['♻️ Recyclebaar'],
+    tags:['🏆 Bestseller'],
+    rating:4.7, reviews:64,
+    roastDate:'4 werkdagen geleden',
+    desc:'De Capricornio is een Braziliaanse specialty koffie verwerkt via het honey process. Dit betekent dat een deel van het vruchtvlees op de boon blijft tijdens het droogproces, wat zorgt voor een natuurlijke zoetheid en een rijke body.\n\nIn de kop proef je hazelnoot, steenfruit en een vleugje honing — een toegankelijke en ronde koffie die zowel als espresso als als filterkoffie uitstekend tot zijn recht komt. Geroosterd in de Hoeksche Waard door Hoeksche Branders.',
+    prices: {250:14.50, 500:26.50, 1000:48.00},
+  },
+  'yellow-bourbon': {
+    id:'yellow-bourbon', photo:'yellow-Bourbon.jpg', bg:'#3d1f0a', region:'Zuid-Amerika', icon:'🫘',
+    brand:'Hoeksche Branders', brandInitial:'H', brandColor:'#5a3010',
+    brandCity:'Hoeksche Waard', brandYear:2018, brandScore:4.7, brandReviews:164,
+    name:'Yellow Bourbon',
+    flag:'🇧🇷', country:'Brazilië', region_full:'100% Arabica',
+    processing:'Pulped Natural', roastLevel:3, roastLabel:'Medium',
+    sca:85.0, variety:'Yellow Bourbon',
+    farm:'Fazenda', altitude:'1.100–1.500 m', harvest:'Jun–Sep 2024',
+    brewing:['☕ Espresso','🫖 Filter','🏺 Aeropress'],
+    flavors:['🍫 Melk chocolade','🍦 Karamel','🥜 Nootachtig'],
+    certs:['♻️ Recyclebaar'],
+    tags:[],
+    rating:4.6, reviews:41,
+    roastDate:'3 werkdagen geleden',
+    desc:'De Yellow Bourbon is een Braziliaanse koffie van de gelijknamige variëteit, verwerkt via het pulped natural proces. Dit geeft de koffie een zachte body met tonen van melkchocolade en karamel — ideaal voor wie van een toegankelijke, ronde smaakbeleving houdt.\n\nZowel als espresso als filterkoffie is deze boon een betrouwbare keuze voor dagelijks gebruik. Geroosterd met zorg door Hoeksche Branders in de Hoeksche Waard.',
+    prices: {250:13.50, 500:24.50, 1000:44.00},
+  },
+  argote: {
+    id:'argote', photo:'argote.jpg', bg:'#3d1f0a', region:'Zuid-Amerika', icon:'🫘',
+    brand:'Hoeksche Branders', brandInitial:'H', brandColor:'#5a3010',
+    brandCity:'Hoeksche Waard', brandYear:2018, brandScore:4.7, brandReviews:164,
+    name:'Argote',
+    flag:'🇨🇴', country:'Colombia', region_full:'100% Arabica',
+    processing:'Fully Washed', roastLevel:2, roastLabel:'Light-Medium',
+    sca:88.0, variety:'Arabica',
+    farm:'Finca Argote', altitude:'1.900–2.200 m', harvest:'Nov–Feb 2024',
+    brewing:['☕ Espresso','🫖 Filter','🍶 Pour-over'],
+    flavors:['🍎 Appelcider','🥜 Hazelnoot','🍋 Citrus'],
+    certs:['♻️ Recyclebaar'],
+    tags:[],
+    rating:4.8, reviews:57,
+    roastDate:'2 werkdagen geleden',
+    desc:'De Argote is een Colombian single-origin geteeld op grote hoogte (1.900–2.200 m) in de bergen van Colombia. De fully washed verwerking zorgt voor een schone, heldere kop met een fijne zuurgraad.\n\nIn de kop proef je appelcider en hazelnoot met een frisse citrustoets. Een elegante koffie die schittert als pour-over of filterkoffie. Geroosterd in de Hoeksche Waard door Hoeksche Branders.',
+    prices: {250:15.50, 500:28.00, 1000:52.00},
+  },
+  huehuetenango: {
+    id:'huehuetenango', photo:'huehuetenango.jpg', bg:'#3d1f0a', region:'Centraal-Amerika', icon:'🌿',
+    brand:'Hoeksche Branders', brandInitial:'H', brandColor:'#5a3010',
+    brandCity:'Hoeksche Waard', brandYear:2018, brandScore:4.7, brandReviews:164,
+    name:'Huehuetenango',
+    flag:'🇬🇹', country:'Guatemala', region_full:'Huehuetenango',
+    processing:'Fully Washed', roastLevel:2, roastLabel:'Light-Medium',
+    sca:87.0, variety:'Arabica',
+    farm:'Cooperatieve boerderijen', altitude:'1.500–1.900 m', harvest:'Jan–Apr 2025',
+    brewing:['🫖 Filter','🍶 Pour-over','🌊 Chemex'],
+    flavors:['🍋 Citrus','🍎 Appel','🌸 Bloemig','🍫 Witte chocolade'],
+    certs:['♻️ Recyclebaar'],
+    tags:[],
+    rating:4.7, reviews:38,
+    roastDate:'3 werkdagen geleden',
+    desc:'Huehuetenango is een van de hoogst gelegen koffieregio\'s van Guatemala, bekend om zijn complexe en fruitige koffies. De fully washed verwerking zorgt voor een heldere kop met levendige citrus- en appeltonen.\n\nEen bloemige elegantie maakt deze koffie bijzonder geschikt voor pour-over en filterbereiding. Geroosterd door Hoeksche Branders in de Hoeksche Waard.',
+    prices: {250:16.50, 500:30.00, 1000:56.00},
+  },
+  blend: {
+    id:'blend', photo:'blend.jpg', bg:'#3d1f0a', region:'Blend', icon:'☕',
+    brand:'Hoeksche Branders', brandInitial:'H', brandColor:'#5a3010',
+    brandCity:'Hoeksche Waard', brandYear:2018, brandScore:4.7, brandReviews:164,
+    name:'Blend',
+    flag:'🌍', country:'Meerdere herkomsten', region_full:'Huismengsel',
+    processing:'Washed & Natural', roastLevel:3, roastLabel:'Medium',
+    sca:85.0, variety:'Arabica blend',
+    farm:'Meerdere boerderijen', altitude:'Variabel', harvest:'2024–2025',
+    brewing:['☕ Espresso','🫖 Filter','🏺 Aeropress'],
+    flavors:['🍫 Chocolade','🥜 Nootachtig','🍦 Karamel'],
+    certs:['♻️ Recyclebaar'],
+    tags:[],
+    rating:4.5, reviews:29,
+    roastDate:'4 werkdagen geleden',
+    desc:'De Blend van Hoeksche Branders is een zorgvuldig samengesteld huismengsel van koffies uit meerdere herkomsten. Het resultaat is een gebalanceerde, toegankelijke koffie met tonen van chocolade, noot en karamel.\n\nPerfect voor dagelijks gebruik — als espresso romig en vol, als filterkoffie warm en vertroostend. Geroosterd in de Hoeksche Waard.',
+    prices: {250:12.50, 500:22.50, 1000:40.00},
+  },
+  'swiss-water': {
+    id:'swiss-water', photo:'swiss-water.jpg', bg:'#3d1f0a', region:'Decaf', icon:'☕',
+    brand:'Hoeksche Branders', brandInitial:'H', brandColor:'#5a3010',
+    brandCity:'Hoeksche Waard', brandYear:2018, brandScore:4.7, brandReviews:164,
+    name:'Swiss Water Decaf',
+    flag:'🌍', country:'Meerdere herkomsten', region_full:'Swiss Water Process',
+    processing:'Swiss Water Process (cafeïnevrij)', roastLevel:3, roastLabel:'Medium',
+    sca:84.0, variety:'Arabica blend',
+    farm:'Meerdere boerderijen', altitude:'Variabel', harvest:'2024–2025',
+    brewing:['☕ Espresso','🫖 Filter','🏺 Aeropress'],
+    flavors:['🍫 Chocolade','🍦 Karamel','🥜 Nootachtig'],
+    certs:['🌱 Cafeïnevrij','♻️ Recyclebaar'],
+    tags:['💤 99,9% cafeïnevrij'],
+    rating:4.5, reviews:33,
+    roastDate:'3 werkdagen geleden',
+    desc:'De Swiss Water Decaf is een cafeïnevrije koffie verwerkt via het Swiss Water Process — een chemievrije methode waarbij water wordt gebruikt om 99,9% van de cafeïne te verwijderen, zonder in te leveren op smaak.\n\nIn de kop proef je chocolade, karamel en nootachtige tonen. Ideaal voor de avond of voor wie bewust cafeïne vermijdt. Geroosterd in de Hoeksche Waard door Hoeksche Branders.',
+    prices: {250:14.50, 500:26.50, 1000:48.00},
+  },
+  blawan: {
+    id:'blawan', photo:'blawanEstate-2.jpg', bg:'#2a1a08', region:'Arabisch/Azië', icon:'☕',
+    brand:'Giraffe Coffee', brandInitial:'G', brandColor:'#e8a020',
+    brandCity:'Amsterdam', brandYear:2014, brandScore:4.5, brandReviews:280,
+    name:'Blawan Estate',
+    flag:'🇮🇩', country:'Indonesië', region_full:'Java · Natural',
+    processing:'Natural', roastLevel:4, roastLabel:'Medium-Dark',
+    sca:87.0, variety:'Arabica',
+    farm:'Blawan Estate, Java', altitude:'900–1.500 m', harvest:'2024',
+    brewing:['☕ Espresso','🫖 Filter','🏺 Aeropress'],
+    flavors:['🌿 Kruidig','🍫 Pure chocolade','🌰 Aarde'],
+    certs:['♻️ Recyclebaar'],
+    tags:[],
+    rating:4.5, reviews:29,
+    roastDate:'5 werkdagen geleden',
+    desc:'Blawan Estate is een bijzondere Java-koffie van het gelijknamige estate op de flanken van de vulkaan Ijen. De natural verwerking geeft deze koffie een volle body met kruidige en aardse tonen.\n\nGeroosterd door Giraffe Coffee uit Amsterdam.',
+    prices: {250:14.00, 500:25.50},
+  },
+  latinamerica: {
+    id:'latinamerica', photo:'latinamerica-1.jpg', bg:'#1e2e10', region:'Blend', icon:'🌍',
+    brand:'Giraffe Coffee', brandInitial:'G', brandColor:'#e8a020',
+    brandCity:'Amsterdam', brandYear:2014, brandScore:4.5, brandReviews:280,
+    name:'Latin America',
+    flag:'🌎', country:'Midden- & Zuid-Amerika', region_full:'Blend · Washed',
+    processing:'Washed', roastLevel:2, roastLabel:'Light-Medium',
+    sca:86.0, variety:'Arabica blend',
+    farm:'Meerdere boerderijen', altitude:'1.200–1.800 m', harvest:'2024',
+    brewing:['🫖 Filter','☕ Espresso','🍶 Pour-over'],
+    flavors:['🍋 Citrus','🍎 Appel','🍦 Karamel'],
+    certs:['🌱 Biologisch','♻️ Recyclebaar'],
+    tags:['🌱 BIO'],
+    rating:4.7, reviews:44,
+    roastDate:'4 werkdagen geleden',
+    desc:'Latin America is een gebalanceerd blend van biologische koffies uit Midden- en Zuid-Amerika. Fris en helder met citrus en appel, afgerond met een zachte karameltoets.\n\nGeroosterd door Giraffe Coffee uit Amsterdam.',
+    prices: {250:13.00, 500:23.50},
+  },
+  organicblend: {
+    id:'organicblend', photo:'organicblend_1.jpg', bg:'#1a2a1a', region:'Blend', icon:'🌱',
+    brand:'Giraffe Coffee', brandInitial:'G', brandColor:'#e8a020',
+    brandCity:'Amsterdam', brandYear:2014, brandScore:4.5, brandReviews:280,
+    name:'Organic Blend',
+    flag:'🌍', country:'Meerdere herkomsten', region_full:'100% Biologisch',
+    processing:'Washed & Natural', roastLevel:3, roastLabel:'Medium',
+    sca:85.0, variety:'Arabica blend',
+    farm:'Gecertificeerde biologische boerderijen', altitude:'1.000–1.600 m', harvest:'2024',
+    brewing:['☕ Espresso','🫖 Filter','🏺 Aeropress'],
+    flavors:['🍫 Cacao','🥜 Walnoot','🍯 Honing'],
+    certs:['🌱 Biologisch','♻️ Fairtrade'],
+    tags:['♻️ Fairtrade'],
+    rating:4.6, reviews:38,
+    roastDate:'3 werkdagen geleden',
+    desc:'Organic Blend is een 100% biologisch gecertificeerd blend van Giraffe Coffee. Rijk, warm en vertroostend — ideaal voor dagelijks gebruik.\n\nGeroosterd door Giraffe Coffee uit Amsterdam.',
+    prices: {250:14.00, 500:25.50},
+  },
+  'bb-carantos-mild': {
+    id:'bb-carantos-mild', photo:'BelgianBlenders/carantos_mild.jpg', bg:'#1e2a38', region:'Blend', icon:'☕',
+    brand:'Belgian Blenders', brandInitial:'B', brandColor:'#1B3A6B',
+    brandCity:'Aalst', brandYear:2012, brandScore:4.5, brandReviews:287,
+    name:'Carantos Mild',
+    flag:'🌍', country:'Meerdere herkomsten', region_full:'Zacht huismengsel',
+    processing:'Washed', roastLevel:2, roastLabel:'Medium',
+    sca:84.0, variety:'Arabica blend',
+    farm:'Meerdere boerderijen', altitude:'Variabel', harvest:'2024–2025',
+    brewing:['☕ Espresso','🫖 Filter','🏺 Aeropress'],
+    flavors:['🍫 Chocolade','🍦 Karamel','🥜 Nootachtig'],
+    certs:['♻️ Recyclebaar'],
+    tags:[],
+    rating:4.4, reviews:38,
+    roastDate:'5 werkdagen geleden',
+    desc:'Carantos Mild is een zacht en toegankelijk huismengsel van Belgian Blenders. Een perfecte dagelijkse koffie met zachte tonen van chocolade en karamel.\n\nGeroosterd door Belgian Blenders in Aalst.',
+    prices: {250:12.50, 500:22.00, 1000:40.00},
+  },
+  'bb-colombia-la-sofia': {
+    id:'bb-colombia-la-sofia', photo:'BelgianBlenders/colombia_la_sofia .jpg', bg:'#1e3a1e', region:'Zuid-Amerika', icon:'🫘',
+    brand:'Belgian Blenders', brandInitial:'B', brandColor:'#1B3A6B',
+    brandCity:'Aalst', brandYear:2012, brandScore:4.5, brandReviews:287,
+    name:'Colombia La Sofia',
+    flag:'🇨🇴', country:'Colombia', region_full:'La Sofia, Nariño',
+    processing:'Washed', roastLevel:2, roastLabel:'Medium',
+    sca:86.0, variety:'Castillo / Colombia',
+    farm:'Finca La Sofia', altitude:'1.700–2.000 m', harvest:'Mrt–Jun 2024',
+    brewing:['☕ Espresso','🫖 Filter','🍶 Pour-over'],
+    flavors:['🍊 Sinaasappel','🍫 Chocolade','🥜 Hazelnoot'],
+    certs:['♻️ Recyclebaar','☀️ Direct Trade'],
+    tags:[],
+    rating:4.5, reviews:51,
+    roastDate:'3 werkdagen geleden',
+    desc:'Een Colombiaanse single-origin van de Finca La Sofia in Nariño. Helder en gebalanceerd met tonen van sinaasappel en melkchocolade.\n\nGeroosterd door Belgian Blenders in Aalst.',
+    prices: {250:14.00, 500:25.50, 1000:46.00},
+  },
+  'bb-guatemala-antigua-pastoral': {
+    id:'bb-guatemala-antigua-pastoral', photo:'BelgianBlenders/guatemala_antigua_pastoral.jpg', bg:'#1e3a28', region:'Centraal-Amerika', icon:'🌿',
+    brand:'Belgian Blenders', brandInitial:'B', brandColor:'#1B3A6B',
+    brandCity:'Aalst', brandYear:2012, brandScore:4.5, brandReviews:287,
+    name:'Guatemala Antigua Pastoral',
+    flag:'🇬🇹', country:'Guatemala', region_full:'Antigua, Sacatepéquez',
+    processing:'Washed', roastLevel:2, roastLabel:'Light-Medium',
+    sca:87.0, variety:'Bourbon / Caturra',
+    farm:'Cooperatieve boerderijen Antigua', altitude:'1.500–1.800 m', harvest:'Jan–Apr 2025',
+    brewing:['🫖 Filter','🍶 Pour-over','🌊 Chemex'],
+    flavors:['🍋 Citrus','🌸 Bloemig','🍫 Witte chocolade'],
+    certs:['♻️ Recyclebaar'],
+    tags:[],
+    rating:4.6, reviews:44,
+    roastDate:'4 werkdagen geleden',
+    desc:'Guatemala Antigua Pastoral is afkomstig uit de beroemde Antigua-vallei. Een elegant en fris profiel met citrus en bloemige nuances.\n\nGeroosterd door Belgian Blenders in Aalst.',
+    prices: {250:15.00, 500:27.00, 1000:50.00},
+  },
+  'bb-imperial': {
+    id:'bb-imperial', photo:'BelgianBlenders/imperial.jpg', bg:'#1e1a2e', region:'Blend', icon:'👑',
+    brand:'Belgian Blenders', brandInitial:'B', brandColor:'#1B3A6B',
+    brandCity:'Aalst', brandYear:2012, brandScore:4.5, brandReviews:287,
+    name:'Imperial',
+    flag:'🌍', country:'Meerdere herkomsten', region_full:'Prestige blend',
+    processing:'Washed & Natural', roastLevel:3, roastLabel:'Medium-Dark',
+    sca:86.0, variety:'Arabica blend',
+    farm:'Geselecteerde partnerbedrijven', altitude:'Variabel', harvest:'2024–2025',
+    brewing:['☕ Espresso','🏺 Aeropress','🫖 Filter'],
+    flavors:['🍫 Pure chocolade','🥜 Walnoot','🍬 Marsepein'],
+    certs:['♻️ Recyclebaar'],
+    tags:['👑 Premium'],
+    rating:4.7, reviews:67,
+    roastDate:'2 werkdagen geleden',
+    desc:'Imperial is het premium blend van Belgian Blenders — een rijke, krachtige koffie met diepe chocoladetonen en een luxueuze body.\n\nGeroosterd door Belgian Blenders in Aalst.',
+    prices: {250:15.50, 500:28.00, 1000:52.00},
+  },
+  'bb-nicaragua-shg-el-baron': {
+    id:'bb-nicaragua-shg-el-baron', photo:'BelgianBlenders/nicaragua_shg_el_baron.jpg', bg:'#2a1a0e', region:'Centraal-Amerika', icon:'🫘',
+    brand:'Belgian Blenders', brandInitial:'B', brandColor:'#1B3A6B',
+    brandCity:'Aalst', brandYear:2012, brandScore:4.5, brandReviews:287,
+    name:'Nicaragua SHG El Barón',
+    flag:'🇳🇮', country:'Nicaragua', region_full:'Jinotega, SHG',
+    processing:'Washed', roastLevel:2, roastLabel:'Medium',
+    sca:86.0, variety:'Caturra / Catuai',
+    farm:'Finca El Barón', altitude:'1.400–1.600 m', harvest:'Nov–Feb 2024',
+    brewing:['☕ Espresso','🫖 Filter','🍶 Pour-over'],
+    flavors:['🍋 Citrus','🍎 Appel','🍫 Chocolade'],
+    certs:['♻️ Recyclebaar','☀️ Direct Trade'],
+    tags:[],
+    rating:4.5, reviews:33,
+    roastDate:'3 werkdagen geleden',
+    desc:'Nicaragua SHG El Barón is een Strictly High Grown koffie van de Finca El Barón in Jinotega. Helder met citrus en een zachte chocolade-afdronk.\n\nGeroosterd door Belgian Blenders in Aalst.',
+    prices: {250:14.50, 500:26.00, 1000:48.00},
+  },
+  'bb-real': {
+    id:'bb-real', photo:'BelgianBlenders/real.jpg', bg:'#1a2030', region:'Blend', icon:'☕',
+    brand:'Belgian Blenders', brandInitial:'B', brandColor:'#1B3A6B',
+    brandCity:'Aalst', brandYear:2012, brandScore:4.5, brandReviews:287,
+    name:'Real',
+    flag:'🌍', country:'Meerdere herkomsten', region_full:'Klassiek huismengsel',
+    processing:'Washed & Natural', roastLevel:3, roastLabel:'Medium',
+    sca:85.0, variety:'Arabica blend',
+    farm:'Meerdere boerderijen', altitude:'Variabel', harvest:'2024–2025',
+    brewing:['☕ Espresso','🫖 Filter','🏺 Aeropress'],
+    flavors:['🍫 Chocolade','🍦 Karamel','🥜 Nootachtig'],
+    certs:['♻️ Recyclebaar'],
+    tags:[],
+    rating:4.5, reviews:55,
+    roastDate:'4 werkdagen geleden',
+    desc:'Real is het klassieke huismengsel van Belgian Blenders. Evenwichtig en vertrouwd, met tonen van chocolade en karamel — perfect voor dagelijks gebruik.\n\nGeroosterd door Belgian Blenders in Aalst.',
+    prices: {250:13.00, 500:23.50, 1000:43.00},
+  },
+  'bb-royal': {
+    id:'bb-royal', photo:'BelgianBlenders/royal.jpg', bg:'#1a1a2e', region:'Blend', icon:'👑',
+    brand:'Belgian Blenders', brandInitial:'B', brandColor:'#1B3A6B',
+    brandCity:'Aalst', brandYear:2012, brandScore:4.5, brandReviews:287,
+    name:'Royal',
+    flag:'🌍', country:'Meerdere herkomsten', region_full:'Signature blend',
+    processing:'Washed & Natural', roastLevel:3, roastLabel:'Medium-Dark',
+    sca:87.0, variety:'Arabica blend',
+    farm:'Uitgelichte partnerbedrijven', altitude:'Variabel', harvest:'2024–2025',
+    brewing:['☕ Espresso','🏺 Aeropress','🫖 Filter'],
+    flavors:['🍫 Pure chocolade','🍬 Karamel','🥜 Hazelnoot'],
+    certs:['♻️ Recyclebaar'],
+    tags:['⭐ Signature'],
+    rating:4.7, reviews:72,
+    roastDate:'2 werkdagen geleden',
+    desc:'Royal is de signature blend van Belgian Blenders — een rijke, complexe koffie met diep chocolade karakter en subtiele bloemige nuances.\n\nGeroosterd door Belgian Blenders in Aalst.',
+    prices: {250:14.50, 500:26.50, 1000:49.00},
+  },
+};
+
+let activeProduct = null;
+let activeSize = {};
+
+// ── Open detail panel ────────────────────────────────────────────────────
+function openDetail(id) {
+  activeProduct = PRODUCTS[id];
+  if(!activeProduct) return;
+  const p = activeProduct;
+  const defSize = Object.keys(p.prices)[1] || Object.keys(p.prices)[0];
+  activeSize[id] = parseInt(defSize);
+  renderDetail(p, parseInt(defSize));
+  const panel = document.getElementById('detail-panel');
+  panel.style.display = 'block';
+  // reset tabs
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  ['t-reviews','t-info','t-roastery','t-brew'].forEach((t,i)=>{
+    document.getElementById(t).style.display = i===0?'block':'none';
+  });
+  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),60);
+}
+
+function renderDetail(p, size) {
+  const price = p.prices[size];
+  const pricePerKg = ((price/size)*1000).toFixed(2).replace('.',',');
+  const priceStr = price.toFixed(2).replace('.',',');
+
+  const roastDots = Array(5).fill(0).map((_,i)=>`<div class="rd${i<p.roastLevel?' on':''}"></div>`).join('');
+  const flavorPills = p.flavors.map(f=>`<span class="fp">${f}</span>`).join('');
+  const certTags = p.certs.map(c=>`<span class="tag tag-g">${c}</span>`).join('');
+  const extraTags = p.tags.map(t=>`<span class="tag tag-gold">${t}</span>`).join('');
+  const brewPills = p.brewing.map(b=>`<span class="tag tag-g" style="font-size:11px">${b}</span>`).join('');
+  const sizePicker = Object.entries(p.prices).map(([s,pr])=>{
+    const pStr = pr.toFixed(2).replace('.',',');
+    return `<div class="sz-opt${parseInt(s)===size?' active':''}" onclick="setSize('${p.id}',${s})">${s}g<span>€${pStr}</span></div>`;
+  }).join('');
+
+  const dpBB = p.brand === 'Belgian Blenders';
+  const dpPhotoBg = dpBB ? '#ffffff' : p.bg;
+  const dpPhotoBorder = dpBB ? ';box-shadow:inset 0 0 0 1px #1a3a1a' : '';
+  const dpImgStyle = dpBB
+    ? 'width:100%;height:100%;object-fit:contain;display:block;padding:8%'
+    : 'width:100%;height:100%;object-fit:cover;display:block';
+  document.getElementById('dp-inner').innerHTML = `
+    <div class="dp-photo" style="background:${dpPhotoBg}${dpPhotoBorder}">
+      <div class="dp-photo-inner" style="${dpBB ? 'padding:0' : ''}">
+        ${p.photo
+          ? `<img src="${p.photo}" style="${dpImgStyle}">`
+          : `<div class="dp-bag">${p.icon}</div><div class="dp-label"><div class="dp-label-brand">${p.brand}</div><div class="dp-label-name">${p.name}</div></div>`
+        }
+      </div>
+      <div class="dp-thumbs">
+        <div class="dp-thumb active">${p.photo ? `<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:6px">` : p.icon}</div>
+        <div class="dp-thumb">🫘</div>
+        <div class="dp-thumb">🗺️</div>
+        <div class="dp-thumb">📄</div>
+      </div>
+    </div>
+    <div class="dp-info" id="dp-info-${p.id}">
+      <div class="dp-brand-row">
+        <div class="dp-brand-av" style="background:${p.brandColor}">${p.brandInitial}</div>
+        <div>
+          <div class="dp-brand-nm">${p.brand} · <a href="#" style="color:var(--g600)">Bekijk branderij →</a></div>
+          <div class="dp-brand-city">📍 ${p.brandCity} · Opgericht ${p.brandYear}</div>
+        </div>
+        <div class="sca-pill">⭐ ${p.sca.toFixed(1)} SCA</div>
+      </div>
+      <h1 class="dp-title">${p.name}</h1>
+      <div class="dp-tags-row">
+        <span class="stars" style="font-size:14px">★★★★★</span>
+        <span style="font-size:13px;font-weight:700">${p.rating}</span>
+        <span style="font-size:12px;color:var(--muted)">(${p.reviews} reviews)</span>
+        ${certTags}${extraTags}
+      </div>
+      <div class="dp-specs">
+        <div class="spec-item"><div class="spec-lbl">Herkomst</div><div class="spec-val">${p.flag} ${p.country} · ${p.region_full}</div></div>
+        <div class="spec-item"><div class="spec-lbl">Verwerking</div><div class="spec-val">${p.processing}</div></div>
+        <div class="spec-item"><div class="spec-lbl">Roostniveau</div><div class="spec-val">${p.roastLabel} <div class="roast-dots" style="margin-left:4px">${roastDots}</div></div></div>
+        <div class="spec-item"><div class="spec-lbl">Variëteit</div><div class="spec-val">${p.variety}</div></div>
+        <div class="spec-item"><div class="spec-lbl">Hoogte</div><div class="spec-val">${p.altitude}</div></div>
+        <div class="spec-item"><div class="spec-lbl">Geroosterd</div><div class="spec-val" style="color:var(--g600)">🟢 ${p.roastDate}</div></div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px">Bereiding</div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">${brewPills}</div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px">Smaakprofiel</div>
+        <div class="dp-flavors">${flavorPills}</div>
+      </div>
+      <p class="dp-desc">${p.desc.replace(/\n/g,'<br><br>')}</p>
+      <div class="dp-size-row">
+        <div>
+          <div style="font-size:10.5px;color:var(--muted);margin-bottom:6px">Kies gewicht</div>
+          <div class="size-picker">${sizePicker}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="dp-price-sub">${size}g · €${pricePerKg}/kg</div>
+          <div class="dp-price" id="dp-price-${p.id}">€${priceStr}</div>
+        </div>
+      </div>
+      <div class="dp-actions">
+        <button class="btn-add-lg" onclick="addToCart('${p.name}')">🛒 Voeg toe aan winkelwagen</button>
+        <button class="btn-icon" onclick="this.textContent=this.textContent=='❤️'?'🤍':'❤️'">🤍</button>
+        <button class="btn-icon" title="Abonneer">🔄</button>
+      </div>
+      <div class="dp-meta-strip">
+        <span>🚀 Morgen in huis bij bestelling voor 15:00</span>
+        <span>↩️ 100% kwaliteitsgarantie</span>
+        <span>📦 Gratis verzending bij >€25</span>
+      </div>
+    </div>`;
+}
+
+function setSize(id, size) {
+  activeSize[id] = size;
+  renderDetail(PRODUCTS[id], size);
+}
+
+function closeDetail() {
+  document.getElementById('detail-panel').style.display = 'none';
+  activeProduct = null;
+}
+
+// ── Roastery data ─────────────────────────────────────────────────────────
+const ROASTERIES = {
+  friedhats: {
+    id:'friedhats', icon:'☕', bg:'linear-gradient(135deg,#1e3a1e,#3a7d3c)',
+    name:'Friedhats Coffee', city:'Amsterdam-Noord', founded:2013,
+    rating:4.8, reviews:847, productCount:12,
+    desc:'Friedhats is opgericht door Sebastian Spindler en Richard Nieland. Vanuit hun roastery op het NDSM-terrein in Amsterdam-Noord roosteren ze wekelijks kleine batches van de hoogste kwaliteit. Ze bezoeken persoonlijk hun boerderijen in Ethiopië, Colombia en Guatemala om directe relaties met boeren te onderhouden.\n\nHun filosofie: zo min mogelijk stappen tussen boer en beker. Geen tussenpersonen, geen compromissen op kwaliteit.',
+    certs:['⭐ The Roast Standard','🌱 Biologisch gecertificeerd','☀️ Direct Trade','♻️ Zero Waste Roastery'],
+    website:'friedhats.com', instagram:'@friedhats',
+    products:['capricornio','blend'],
+  },
+  bocca: {
+    id:'bocca', icon:'🫘', bg:'linear-gradient(135deg,#5a3a2a,#a06040)',
+    name:'Bocca Coffee', city:'Amsterdam', founded:2009,
+    rating:4.6, reviews:623, productCount:9,
+    desc:'Bocca Coffee is een van de pioniers van de Nederlandse specialty scene. Al sinds 2009 zetten ze de standaard voor transparante inkoop en duurzaam roosteren. Hun team van Q-graders beoordeelt elk lot persoonlijk voordat het in het assortiment komt.\n\nBocca werkt nauw samen met boeren in Colombia, Ethiopië en Brazilië, met een focus op langdurige relaties en eerlijke prijzen.',
+    certs:['⭐ The Roast Standard','🌱 Biologisch','♻️ Fairtrade','☀️ Direct Trade'],
+    website:'boccacoffee.com', instagram:'@boccacoffee',
+    products:['capricornio','blend'],
+  },
+  manmetbril: {
+    id:'manmetbril', icon:'🌿', bg:'linear-gradient(135deg,#2a3a1a,#4a6a2a)',
+    name:'Man Met Bril Koffie', city:'Rotterdam', founded:2012,
+    rating:4.7, reviews:412, productCount:7,
+    desc:'Man Met Bril Koffie is een Utrechtse specialty branderij die bekend staat om hun toegankelijke aanpak van specialty coffee. Ze geloven dat uitstekende koffie voor iedereen beschikbaar moet zijn — niet alleen voor de kenner.\n\nHun assortiment is klein maar zorgvuldig samengesteld, met een focus op biologische en direct trade koffies uit Brazilië, Colombia en Ethiopië.',
+    certs:['⭐ The Roast Standard','🌱 Biologisch','☀️ Direct Trade'],
+    website:'manmetbrilkoffie.nl', instagram:'@manmetbrilkoffie',
+    products:['capricornio','blend'],
+  },
+  whitelabel: {
+    id:'whitelabel', icon:'✨', bg:'linear-gradient(135deg,#3a1a5a,#6a3a9a)',
+    name:'White Label Coffee', city:'Amsterdam', founded:2011,
+    rating:4.9, reviews:1204, productCount:11,
+    desc:'White Label Coffee is de meest gewaardeerde specialty branderij op RoastSelect. Met een gemiddelde beoordeling van 4,9 en meer dan 1.200 reviews spreken de cijfers voor zich. Hun obsessie met consistentie en precisie is legendarisch in de Nederlandse koffiewereld.\n\nOpgericht in 2011, zijn ze inmiddels een begrip — zowel bij koffiepuristen als bij nieuwe koffieliefhebbers die op zoek zijn naar het allerbeste.',
+    certs:['⭐ The Roast Standard','🏆 RoastSelect Top Branderij 2024','🌱 Biologisch','☀️ Direct Trade'],
+    website:'whitelabelcoffee.nl', instagram:'@whitelabelcoffee',
+    products:['capricornio','blend'],
+  },
+};
+
+// ── Roastery panel ────────────────────────────────────────────────────────
+function openRoastery(id) {
+  const r = ROASTERIES[id];
+  if (!r) return;
+  renderRoastery(r);
+  const panel = document.getElementById('roastery-panel');
+  panel.style.display = 'block';
+  setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+}
+
+function closeRoastery() {
+  document.getElementById('roastery-panel').style.display = 'none';
+}
+
+function renderRoastery(r) {
+  const yearsActive = 2025 - r.founded;
+  const certBadges = r.certs.map(c => `<div class="rp-cert-badge">${c}</div>`).join('');
+
+  // Build product mini-cards
+  const prodCards = r.products.map(pid => {
+    const p = PRODUCTS[pid];
+    if (!p) return '';
+    const thumb = p.photo
+      ? `<div class="rp-prod-thumb"><img src="${p.photo}" alt="${p.name}"></div>`
+      : `<div class="rp-prod-thumb" style="background:${p.bg}">${p.icon}</div>`;
+    const price = Object.values(p.prices)[0];
+    return `
+      <div class="rp-prod-card" onclick="openDetail('${p.id}')">
+        ${thumb}
+        <div class="rp-prod-info">
+          <div class="rp-prod-name">${p.name}</div>
+          <div class="rp-prod-origin">${p.flag} ${p.country} · ${p.processing}</div>
+        </div>
+        <div class="rp-prod-price">€${price.toFixed(2).replace('.',',')}</div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('rp-inner').innerHTML = `
+    <div class="rp-hero">
+      <div class="rp-hero-noise"></div>
+      <div class="rp-hero-left">
+        <div class="rp-hero-eyebrow">
+          <div class="rp-hero-logo-inline" style="background:${r.bg}">${r.icon}</div>
+          🏭 Branderij profiel
+        </div>
+        <div class="rp-hero-name">${r.name}</div>
+        <div class="rp-hero-city">📍 ${r.city} · Opgericht ${r.founded}</div>
+        <p class="rp-hero-desc">${r.desc.replace(/\n/g,'<br><br>')}</p>
+        <div class="rp-hero-stats">
+          <div class="rp-stat"><div class="rp-stat-val">${r.productCount}</div><div class="rp-stat-lbl">Producten</div></div>
+          <div class="rp-stat"><div class="rp-stat-val">${r.rating}★</div><div class="rp-stat-lbl">Gem. score</div></div>
+          <div class="rp-stat"><div class="rp-stat-val">${r.reviews.toLocaleString('nl')}</div><div class="rp-stat-lbl">Reviews</div></div>
+          <div class="rp-stat"><div class="rp-stat-val">${yearsActive}+</div><div class="rp-stat-lbl">Jaar actief</div></div>
+        </div>
+        <div class="rp-hero-links">
+          <button class="rp-link">🌐 ${r.website}</button>
+          <button class="rp-link">📸 ${r.instagram}</button>
+          <button class="rp-link">👁️ Alle ${r.productCount} producten →</button>
+        </div>
+      </div>
+      <div class="rp-certs-box">
+        <div class="rp-certs-title">RoastSelect Keurmerk</div>
+        ${certBadges}
+        <div style="font-size:10.5px;color:rgba(255,255,255,.35);margin-top:6px">Lid sinds 2024</div>
+      </div>
+    </div>
+    <div class="rp-body">
+      <div>
+        <div class="rp-section-title">☕ Uitgelichte producten</div>
+        <div class="rp-prod-grid">${prodCards}</div>
+      </div>
+    </div>`;
+}
+
+// ── Cart ─────────────────────────────────────────────────────────────────
+function openCart() {
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartDrawer').classList.add('open');
+}
+function loadMoreProducts() {
+  const extra = document.getElementById('extra-products');
+  const wrap  = document.getElementById('load-more-wrap');
+  extra.style.display = 'block';
+  // Smooth scroll to new cards
+  setTimeout(() => extra.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  // Hide the button after loading
+  wrap.style.display = 'none';
+}
+
+function closeCart() {
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartDrawer').classList.remove('open');
+}
+function addToCart(name) {
+  showToast('☕ ' + name + ' toegevoegd!');
+  openCart();
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+function updateQty(btn, delta) {
+  const v = btn.parentElement.querySelector('.qty-val');
+  v.textContent = Math.max(1, parseInt(v.textContent) + delta);
+}
+document.getElementById('cartBtn').onclick = openCart;
+
+// ── Tabs ─────────────────────────────────────────────────────────────────
+function switchTab(el, targetId) {
+  el.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  ['t-reviews','t-info','t-roastery','t-brew'].forEach(id=>{
+    document.getElementById(id).style.display = id===targetId?'block':'none';
+  });
+}
+
+// ── Filter interactions ───────────────────────────────────────────────────
+function setRoast(el) {
+  el.closest('.roast-bar').querySelectorAll('.roast-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+}
+function toggle(el) {
+  el.classList.toggle('checked');
+  const box = el.querySelector('.chk-box');
+  box.textContent = el.classList.contains('checked') ? '✓' : '';
+}
+document.querySelectorAll('.vt-btn').forEach(b=>b.addEventListener('click',function(){
+  this.closest('.view-tog').querySelectorAll('.vt-btn').forEach(x=>x.classList.remove('active'));
+  this.classList.add('active');
+}));
+document.querySelectorAll('.rvf-btn').forEach(b=>b.addEventListener('click',function(){
+  this.closest('.rv-filter-row').querySelectorAll('.rvf-btn').forEach(x=>x.classList.remove('active'));
+  this.classList.add('active');
+}));
+
+// ── Brand filter & dynamic product grid ──────────────────────────────────
+const BRAND_ORDER = ['Hoeksche Branders', 'Giraffe Coffee', 'Belgian Blenders'];
+const REGION_COLORS = {
+  'Oost-Afrika':'#C9724A','Centraal-Afrika':'#C9A84C','Arabisch/Azië':'#9B9BC9',
+  'Centraal-Amerika':'#6BAA78','Zuid-Amerika':'#A0744E','Pacific':'#7ABFBF',
+  'Blend':'#8A9BA8','Gelimiteerd':'#6B3A2A','Decaf':'#8A9BA8',
+};
+const LIGHT_REGIONS = ['Centraal-Amerika'];
+const DEFAULT_BRANDS = ['Hoeksche Branders', 'Giraffe Coffee', 'Belgian Blenders'];
+let activeBrands = new Set(DEFAULT_BRANDS);
+
+function ratingStars(r) {
+  if (r >= 4.7) return '★★★★★';
+  if (r >= 4.3) return '★★★★½';
+  return '★★★★';
+}
+
+function makeCard(p) {
+  const rc = REGION_COLORS[p.region] || '#8A9BA8';
+  const regionStyle = LIGHT_REGIONS.includes(p.region) ? `background:${rc};color:#1a3a1a` : `background:${rc}`;
+  const sizes = Object.keys(p.prices).map(Number).sort((a,b)=>a-b);
+  const ms = sizes[0], mp = p.prices[ms];
+  const weightLabel = ms + 'g' + (sizes.length > 1 ? ' · ook ' + sizes.slice(1).map(s => s >= 1000 ? s/1000+'kg' : s+'g').join(' en ') : '');
+  const priceStr = mp.toFixed(2).replace('.',',');
+  const pricePerKg = ((mp/ms)*1000).toFixed(2).replace('.',',');
+  const dots = Array(5).fill(0).map((_,i)=>`<div class="rd${i<p.roastLevel?' on':''}"></div>`).join('');
+  const flavorTags = p.flavors.slice(0,3).map(f=>`<span class="fl-tag">${f}</span>`).join('');
+  const scaBadge = `<div class="cb cb-sca">⭐ ${p.sca} SCA</div>`;
+  const extraBadge = (() => {
+    const tag = p.tags[0] || ''; if (!tag) return '';
+    let cls = 'cb-new';
+    if (tag.startsWith('🌱')||tag.startsWith('♻️')||tag.startsWith('💤')) cls = 'cb-bio';
+    if (tag.startsWith('💎')||tag.startsWith('⚠️')) cls = 'cb-ltd';
+    return `<div class="cb ${cls}">${tag}</div>`;
+  })();
+  const isBB = p.brand === 'Belgian Blenders';
+  const imgStyle = isBB
+    ? 'width:100%;height:100%;object-fit:contain;display:block;padding:5%'
+    : '';
+  const photoHTML = p.photo
+    ? `<img src="${p.photo}" alt="${p.brand} ${p.name}"${imgStyle ? ` style="${imgStyle}"` : ''}>`
+    : `<div class="product-artwork"><div class="artwork-bag"><div class="bag-shape">${p.icon}</div></div></div>`;
+  const cardPhotoBg = isBB ? '#ffffff' : p.bg;
+  const cardPhotoBorder = isBB ? ';box-shadow:inset 0 0 0 1px #1a3a1a' : '';
+  return `<div class="prod-card" onclick="openDetail('${p.id}')">
+      <div class="card-photo" style="background:${cardPhotoBg}${cardPhotoBorder}">
+        <div class="card-photo-inner">${photoHTML}</div>
+        <div class="card-badges">${scaBadge}${extraBadge}</div>
+        <button class="card-wish" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+        <div class="origin-dot" style="background:${rc}"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-brand-row">
+          <div class="brand-avatar" style="background:${p.brandColor}">${p.brandInitial}</div>
+          <span class="brand-nm">${p.brand}</span>
+          <span class="brand-check">✓</span>
+        </div>
+        <div class="card-title">${p.name}</div>
+        <div class="card-origin">${p.flag} ${p.country} · ${p.processing}
+          <span class="origin-region" style="${regionStyle}">${p.region}</span>
+        </div>
+        <div class="card-flavors">${flavorTags}</div>
+        <div style="margin-bottom:8px">
+          <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">Roostniveau</div>
+          <div class="roast-dots">${dots}</div>
+        </div>
+        <div class="card-rating">
+          <span class="stars">${ratingStars(p.rating)}</span>
+          <span class="rat-score">${p.rating.toString().replace('.',',')}</span>
+          <span class="rat-count">(${p.reviews} reviews)</span>
+        </div>
+        <div class="card-footer">
+          <div class="price-wrap">
+            <div class="price-weight">${weightLabel}</div>
+            <div class="price-main">€${priceStr}</div>
+            <div class="price-per">€${pricePerKg}/kg</div>
+          </div>
+          <button class="btn-add" onclick="event.stopPropagation();addToCart('${p.name}')">+ Voeg toe</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function brandSortKey(brand) {
+  const idx = BRAND_ORDER.indexOf(brand);
+  return idx >= 0 ? idx : BRAND_ORDER.length;
+}
+
+function renderProductGrid() {
+  let products = Object.values(PRODUCTS);
+  if (activeBrands.size > 0) products = products.filter(p => activeBrands.has(p.brand));
+  products.sort((a,b) => {
+    const ka = brandSortKey(a.brand), kb = brandSortKey(b.brand);
+    if (ka !== kb) return ka - kb;
+    if (a.brand !== b.brand) return a.brand.localeCompare(b.brand, 'nl');
+    return a.name.localeCompare(b.name, 'nl');
+  });
+  const container = document.getElementById('prod-grid-container');
+  if (container) container.innerHTML = products.map(makeCard).join('');
+  const countEl = document.querySelector('.results-count');
+  if (countEl) {
+    const isDefault = activeBrands.size === DEFAULT_BRANDS.length && DEFAULT_BRANDS.every(b => activeBrands.has(b));
+    const f = !isDefault && activeBrands.size > 0 ? ` — <span class="filter-active">${activeBrands.size} branderij${activeBrands.size>1?'en':''} geselecteerd</span>` : '';
+    countEl.innerHTML = `<strong>${products.length} producten</strong>${f}`;
+  }
+  const lmw = document.getElementById('load-more-wrap');
+  if (lmw) lmw.style.display = 'none';
+  const ep = document.getElementById('extra-products');
+  if (ep) ep.style.display = 'none';
+}
+
+function toggleBrand(el) {
+  toggle(el);
+  const brand = el.dataset.brand;
+  if (el.classList.contains('checked')) activeBrands.add(brand);
+  else activeBrands.delete(brand);
+  renderProductGrid();
+}
+
+function applyBrandCheckboxes() {
+  document.querySelectorAll('.f-check[data-brand]').forEach(el => {
+    const checked = activeBrands.has(el.dataset.brand);
+    el.classList.toggle('checked', checked);
+    const box = el.querySelector('.chk-box');
+    if (box) box.textContent = checked ? '✓' : '';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  applyBrandCheckboxes();
+  renderProductGrid();
+  document.querySelector('.f-reset').addEventListener('click', function() {
+    activeBrands = new Set(DEFAULT_BRANDS);
+    applyBrandCheckboxes();
+    renderProductGrid();
+  });
+});
+
+// ── Hamburger menu ──────────────────────────────────────────────────────────
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function closeMobileMenu() {
+  hamburgerBtn.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+hamburgerBtn.addEventListener('click', function() {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburgerBtn.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(e) {
+  if (mobileMenu.classList.contains('open') &&
+      !mobileMenu.contains(e.target) &&
+      !hamburgerBtn.contains(e.target)) {
+    closeMobileMenu();
+  }
+});
+
+// ── Mobile filters toggle ───────────────────────────────────────────────────
+function toggleMobileFilters() {
+  const filtersEl = document.querySelector('.filters');
+  const btn = document.getElementById('filtersToggleBtn');
+  const isOpen = filtersEl.classList.toggle('mobile-open');
+  btn.textContent = isOpen ? '✕ Filters verbergen' : '🎯 Filters tonen/verbergen';
+}
+</script>
+</body>
+</html>
