@@ -86,12 +86,12 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 .cat-item.active{color:#fff;border-bottom-color:var(--gold)}
 
 /* ── HERO ── */
-.hero{position:relative;min-height:480px;display:flex;align-items:center;overflow:hidden;
+.hero{position:relative;min-height:480px;display:flex;align-items:flex-start;overflow:hidden;
   background:linear-gradient(140deg,var(--g900) 0%,#253d1c 55%,#33601e 100%)}
 .hero-noise{position:absolute;inset:0;opacity:.12;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")}
 .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 400px;
-  gap:52px;align-items:center;max-width:1300px;margin:0 auto;padding:60px 24px}
+  gap:52px;align-items:start;max-width:1300px;margin:0 auto;padding:60px 24px}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;
   background:rgba(201,150,58,.14);border:1px solid rgba(201,150,58,.28);
   color:var(--gold);font-size:11.5px;font-weight:600;letter-spacing:.09em;
@@ -112,8 +112,20 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 /* Hero featured card */
 .hero-card{background:rgba(255,255,255,.07);backdrop-filter:blur(14px);
   border:1px solid rgba(255,255,255,.11);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:10px}
-.hero-card-hdr{color:rgba(255,255,255,.5);font-size:10.5px;font-weight:700;
+.hero-card-hdr{display:flex;align-items:center;justify-content:space-between;
+  color:rgba(255,255,255,.5);font-size:10.5px;font-weight:700;
   letter-spacing:.09em;text-transform:uppercase;margin-bottom:2px}
+.hero-card-link{color:var(--gold);font-size:10.5px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;text-decoration:none;transition:.15s}
+.hero-card-link:hover{color:#f0b84a}
+.hero-card-divider{border:none;border-top:1px solid rgba(255,255,255,.1);margin:4px 0}
+.feat-last-order{display:flex;align-items:center;gap:12px;padding:11px;
+  border-radius:11px;border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.05)}
+.feat-last-btn{flex-shrink:0;height:34px;padding:0 14px;border-radius:9px;
+  background:var(--gold);color:#fff;font-size:12px;font-weight:700;
+  display:flex;align-items:center;gap:5px;white-space:nowrap;transition:.18s;cursor:pointer}
+.feat-last-btn:hover{background:#b8852e}
 .feat-item{display:flex;align-items:center;gap:12px;padding:11px;
   border-radius:11px;border:1px solid rgba(255,255,255,.07);
   background:rgba(255,255,255,.05);cursor:pointer;transition:.18s}
@@ -833,7 +845,7 @@ section{padding:36px 0}
   <div class="hero-noise"></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow">☕ Specialty Coffee Marktplaats</div>
+      <div class="hero-eyebrow">☕ Specialty Coffee Marketplace</div>
       <h1 class="hero-title">De <em>beste koffiebonen</em><br>van onafhankelijke<br>Nederlandse branderijen</h1>
       <p class="hero-sub">Rechtstreeks van de branderij, vers geroosterd, met volledige transparantie over herkomst, verwerking en smaak.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -848,7 +860,7 @@ section{padding:36px 0}
       </div>
     </div>
     <div class="hero-card">
-      <div class="hero-card-hdr">🔥 Populair deze week</div>
+      <div class="hero-card-hdr">🔥 Populair deze week <a href="#catalog" class="hero-card-link">Bekijk alles →</a></div>
       <div class="feat-item" onclick="openDetail('yirg')">
         <div class="feat-thumb" style="background:#C9724A">
           <div class="feat-thumb-img">☕</div>
@@ -878,6 +890,18 @@ section{padding:36px 0}
           <div class="feat-brand">Speciaal Koffie · Utrecht</div>
         </div>
         <div class="feat-price">€24,00</div>
+      </div>
+      <hr class="hero-card-divider">
+      <div class="hero-card-hdr" style="margin-bottom:2px">📦 Jouw laatste bestelling</div>
+      <div class="feat-last-order">
+        <div class="feat-thumb" style="background:#5a3010">
+          <div class="feat-thumb-img">☕</div>
+        </div>
+        <div class="feat-info">
+          <div class="feat-name">Ethiopia Sidama Natural</div>
+          <div class="feat-brand">Drovers Coffee · besteld 3 weken geleden</div>
+        </div>
+        <button class="feat-last-btn" onclick="addToCart('Ethiopia Sidama Natural')">Opnieuw →</button>
       </div>
     </div>
   </div>
