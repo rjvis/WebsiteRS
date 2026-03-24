@@ -604,163 +604,6 @@ section{padding:36px 0}
 .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;
   color:var(--g600);font-weight:600;cursor:pointer;background:none;border:none;
   padding:0;margin-bottom:14px}
-
-/* ══════════════════════════════════════════════
-   MOBILE HAMBURGER MENU
-══════════════════════════════════════════════ */
-.nav-hamburger{display:none;flex-direction:column;justify-content:center;
-  align-items:center;width:40px;height:40px;border-radius:9px;gap:5px;
-  background:rgba(255,255,255,.1);margin-left:auto;flex-shrink:0;cursor:pointer}
-.nav-hamburger span{display:block;width:20px;height:2px;background:#fff;
-  border-radius:2px;transition:.25s}
-.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-hamburger.open span:nth-child(2){opacity:0}
-.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;
-  background:var(--g900);z-index:199;padding:16px;flex-direction:column;gap:4px;
-  border-bottom:2px solid rgba(255,255,255,.08);max-height:calc(100vh - var(--nav-h));
-  overflow-y:auto}
-.nav-mobile-menu.open{display:flex}
-.nav-mobile-menu .nav-link{padding:12px 14px;border-radius:10px;font-size:14px}
-.nav-mobile-menu .nav-link:hover,.nav-mobile-menu .nav-link.active{background:rgba(255,255,255,.12)}
-.nav-mobile-search{position:relative;margin-bottom:8px}
-.nav-mobile-search input{width:100%;height:44px;border-radius:10px;border:2px solid transparent;
-  background:rgba(255,255,255,.1);color:#fff;padding:0 48px 0 16px;
-  font-family:var(--ff-b);font-size:14px;outline:none}
-.nav-mobile-search input::placeholder{color:rgba(255,255,255,.45)}
-.nav-mobile-search input:focus{background:rgba(255,255,255,.15);border-color:var(--gold)}
-.nav-mobile-search-btn{position:absolute;right:6px;top:50%;transform:translateY(-50%);
-  width:34px;height:34px;border-radius:8px;background:var(--gold);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:15px}
-.nav-mobile-actions{display:flex;gap:8px;margin-top:8px}
-.nav-mobile-actions .btn-nav{flex:1;justify-content:center;height:42px}
-
-/* ── FILTERS TOGGLE (mobile) ── */
-.filters-toggle-btn{display:none;width:100%;height:42px;border-radius:10px;
-  background:var(--g900);color:#fff;font-size:13.5px;font-weight:600;
-  align-items:center;justify-content:center;gap:8px;margin-bottom:14px;cursor:pointer}
-
-/* ══════════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-══════════════════════════════════════════════ */
-
-/* ── Tablet (≤900px) ── */
-@media(max-width:900px){
-  /* Nav */
-  .nav-search,.nav-links,.nav-actions{display:none}
-  .nav-hamburger{display:flex}
-  .nav-logo svg{height:60px}
-
-  /* Hero */
-  .hero-inner{grid-template-columns:1fr;gap:28px;padding:36px 20px}
-  .hero-card{display:none}
-  .hero-title{font-size:clamp(26px,5vw,38px)}
-  .hero-sub{font-size:15px}
-
-  /* Layout: sidebar + content → single column */
-  .page-layout{grid-template-columns:1fr;padding:20px 16px;gap:16px}
-  .filters{position:static;display:none}
-  .filters.mobile-open{display:block}
-  .filters-toggle-btn{display:flex}
-
-  /* Footer */
-  .footer-main{grid-template-columns:1fr;gap:28px}
-  .footer-cols{grid-template-columns:repeat(2,1fr);gap:20px}
-
-  /* Quiz CTA */
-  .quiz-cta{grid-template-columns:1fr;padding:28px 24px;gap:20px;text-align:center}
-  .qc-side{flex-direction:row;justify-content:center}
-
-  /* Detail panel */
-  .dp-grid{grid-template-columns:1fr}
-  .dp-photo{min-height:240px}
-  #detail-panel{margin:0 16px 24px}
-
-  /* Roastery panel */
-  .rp-hero{grid-template-columns:1fr;gap:20px;padding:24px}
-  .rp-certs-box{min-width:unset}
-  .rp-prod-grid{grid-template-columns:1fr 1fr}
-  .rp-body{padding:20px 20px}
-  #roastery-panel{margin:0 16px 24px}
-
-  /* Roastery grid */
-  .roastery-grid{grid-template-columns:repeat(2,1fr)}
-
-  /* Product grid */
-  .prod-grid{grid-template-columns:repeat(2,1fr);gap:14px}
-
-  /* Results bar */
-  .results-bar{flex-direction:column;align-items:flex-start}
-}
-
-/* ── Mobile (≤600px) ── */
-@media(max-width:600px){
-  /* Container */
-  .container{padding:0 14px}
-
-  /* Hero */
-  .hero-inner{padding:28px 14px}
-  .hero-sub{max-width:100%}
-  .hero-trust{gap:12px}
-  .btn{height:44px;font-size:14px}
-
-  /* USP strip */
-  .usp-inner{flex-direction:column;align-items:flex-start;padding:12px 14px;gap:8px}
-
-  /* Page layout */
-  .page-layout{padding:14px 12px}
-
-  /* Product grid: single column */
-  .prod-grid{grid-template-columns:1fr;gap:12px}
-
-  /* Roastery grid */
-  .roastery-grid{grid-template-columns:1fr 1fr;gap:12px}
-
-  /* Section headers */
-  .section-hdr{flex-direction:column;align-items:flex-start;gap:6px}
-
-  /* Detail panel: make it full-width */
-  #detail-panel{margin:0 0 16px;border-radius:0;border-left:none;border-right:none}
-  .dp-info{padding:18px 16px}
-  .tabs{padding:0 16px}
-  .tab{padding:10px 10px;font-size:12.5px}
-  .tab-content{padding:18px 16px}
-  .dp-specs{grid-template-columns:1fr 1fr}
-  .dp-actions{flex-wrap:wrap}
-  .btn-add-lg{flex:1}
-
-  /* Roastery panel */
-  #roastery-panel{margin:0 0 16px;border-radius:0;border-left:none;border-right:none}
-  .rp-hero{padding:20px 16px}
-  .rp-hero-name{font-size:22px}
-  .rp-hero-stats{gap:16px}
-  .rp-prod-grid{grid-template-columns:1fr}
-  .rp-body{padding:16px}
-
-  /* Quiz CTA */
-  .quiz-cta{padding:24px 16px;margin:20px 0}
-  .qc-title{font-size:20px}
-  .btn-quiz{height:44px;padding:0 22px;font-size:14px}
-
-  /* Cart drawer */
-  .cart-drawer{width:100%;right:-100%}
-  .cart-drawer.open{right:0}
-
-  /* Footer */
-  .footer-main{padding:36px 14px 24px}
-  .footer-cols{grid-template-columns:1fr 1fr;gap:16px}
-  .footer-bottom{flex-direction:column;align-items:flex-start}
-
-  /* Reviews */
-  .rv-summary{grid-template-columns:1fr;gap:14px}
-
-  /* Card body */
-  .card-body{padding:12px 12px}
-
-  /* Toast: full width */
-  .toast{left:12px;right:12px;transform:translateX(0) translateY(70px);white-space:normal;text-align:center}
-  .toast.show{transform:translateX(0) translateY(0)}
-}
 </style>
 </head>
 <body>
@@ -801,29 +644,8 @@ section{padding:36px 0}
       </button>
       <button class="btn-nav btn-nav-cta">Inloggen</button>
     </div>
-    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu openen">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </nav>
-
-<!-- ═══ MOBILE MENU ═══ -->
-<div class="nav-mobile-menu" id="mobileMenu">
-  <div class="nav-mobile-search">
-    <input type="text" placeholder="Zoek op boon, smaak, herkomst…">
-    <button class="nav-mobile-search-btn">🔍</button>
-  </div>
-  <a href="#catalog" class="nav-link active" onclick="closeMobileMenu()">🫘 Koffiebonen</a>
-  <a href="#roasteries" class="nav-link" onclick="closeMobileMenu()">🏭 Branderijen</a>
-  <a href="#quiz" class="nav-link" onclick="closeMobileMenu()">✨ Smaakadvies</a>
-  <a href="#" class="nav-link" onclick="closeMobileMenu()">📦 Abonnement</a>
-  <div class="nav-mobile-actions">
-    <button class="btn-nav btn-nav-ghost" onclick="closeMobileMenu();document.getElementById('cartBtn').click()">
-      🛒 Winkelwagen <span class="badge">2</span>
-    </button>
-    <button class="btn-nav btn-nav-cta" onclick="closeMobileMenu()">Inloggen</button>
-  </div>
-</div>
 
 <!-- Category bar -->
 <div class="cat-bar">
@@ -912,11 +734,6 @@ section{padding:36px 0}
 
 <!-- ═══ MAIN CATALOG ═══ -->
 <div id="catalog" style="padding-top:6px">
-<div style="max-width:1300px;margin:0 auto;padding:0 16px">
-  <button class="filters-toggle-btn" id="filtersToggleBtn" onclick="toggleMobileFilters()">
-    🎯 Filters tonen/verbergen
-  </button>
-</div>
 <div class="page-layout">
 
   <!-- SIDEBAR -->
@@ -2678,39 +2495,6 @@ document.addEventListener('DOMContentLoaded', function() {
     renderProductGrid();
   });
 });
-
-// ── Hamburger menu ──────────────────────────────────────────────────────────
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-
-function closeMobileMenu() {
-  hamburgerBtn.classList.remove('open');
-  mobileMenu.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-hamburgerBtn.addEventListener('click', function() {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hamburgerBtn.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', function(e) {
-  if (mobileMenu.classList.contains('open') &&
-      !mobileMenu.contains(e.target) &&
-      !hamburgerBtn.contains(e.target)) {
-    closeMobileMenu();
-  }
-});
-
-// ── Mobile filters toggle ───────────────────────────────────────────────────
-function toggleMobileFilters() {
-  const filtersEl = document.querySelector('.filters');
-  const btn = document.getElementById('filtersToggleBtn');
-  const isOpen = filtersEl.classList.toggle('mobile-open');
-  btn.textContent = isOpen ? '✕ Filters verbergen' : '🎯 Filters tonen/verbergen';
-}
 </script>
 </body>
 </html>
