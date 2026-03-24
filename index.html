@@ -1073,9 +1073,9 @@ section{padding:36px 0}
       <label class="f-check" data-brand="Hoeksche Branders" onclick="toggleBrand(this)"><div class="chk-box"></div>Hoeksche Branders<span class="chk-count">6</span></label>
       <label class="f-check" data-brand="Giraffe Coffee" onclick="toggleBrand(this)"><div class="chk-box"></div>Giraffe Coffee<span class="chk-count">3</span></label>
       <label class="f-check" data-brand="Belgian Blenders" onclick="toggleBrand(this)"><div class="chk-box"></div>Belgian Blenders<span class="chk-count">7</span></label>
+      <label class="f-check" data-brand="Bocca Coffee" onclick="toggleBrand(this)"><div class="chk-box"></div>Bocca Coffee<span class="chk-count">4</span></label>
       <div style="border-top:1px solid var(--border);margin:6px 0"></div>
       <label class="f-check" data-brand="Friedhats Coffee" onclick="toggleBrand(this)"><div class="chk-box"></div>Friedhats Coffee<span class="chk-count">1</span></label>
-      <label class="f-check" data-brand="Bocca Coffee" onclick="toggleBrand(this)"><div class="chk-box"></div>Bocca Coffee<span class="chk-count">1</span></label>
       <label class="f-check" data-brand="White Label Coffee" onclick="toggleBrand(this)"><div class="chk-box"></div>White Label Coffee<span class="chk-count">1</span></label>
       <label class="f-check" data-brand="Koffie Klassiek" onclick="toggleBrand(this)"><div class="chk-box"></div>Koffie Klassiek<span class="chk-count">1</span></label>
       <label class="f-check" data-brand="Speciaal Koffie" onclick="toggleBrand(this)"><div class="chk-box"></div>Speciaal Koffie<span class="chk-count">1</span></label>
@@ -2266,6 +2266,62 @@ const PRODUCTS = {
     desc:'Royal is de signature blend van Belgian Blenders — een rijke, complexe koffie met diep chocolade karakter en subtiele bloemige nuances.\n\nGeroosterd door Belgian Blenders in Aalst.',
     prices: {250:14.50, 500:26.50, 1000:49.00},
   },
+
+  // ── Bocca Coffee ──────────────────────────────────────────────────────────
+  'bocca-gusto': {
+    id:'bocca-gusto', photo:'Fotos/Bocca/gusto.jpg', bg:'#2a1a08', region:'Oost-Afrika', icon:'🌸',
+    brand:'Bocca Coffee', brandInitial:'B', brandColor:'#c0392b',
+    brandCity:'Amsterdam', brandYear:2001, brandScore:4.6, brandReviews:623,
+    name:'Gusto',
+    flag:'🇪🇹', country:'Ethiopië', region_full:'Guji & West Arsi',
+    processing:'Natural & Washed', roastLevel:2, roastLabel:'Medium',
+    sca:87.0, variety:'Heirloom',
+    farm:'Refisa & Mordecofe Washing Station', altitude:'1.800–2.100m', harvest:'Oktober–December 2024',
+    brewing:['☕ Espresso','🫖 Filter'],
+    flavors:['🍓 Bosbes','🍯 Honing','🍫 Melkchocolade'],
+    certs:['🌱 Biologisch','☀️ Direct Trade'],
+    tags:['🏆 Bestseller'],
+    rating:4.7, reviews:312,
+    roastDate:'1 werkdag geleden',
+    desc:'Gusto is de signature organische blend van Bocca — veelzijdig en vol van smaak met tonen van melkchocolade, honing en bosbes. Deze koffie zit boordevol levenslust en is geschikt voor zowel espresso als filter.\n\nAfkomstig uit de Guji en West Arsi regio\'s in Ethiopië, geroosterd in Amsterdam.',
+    prices: {250:11.20, 500:20.50, 1000:38.00},
+  },
+  'bocca-soulmate': {
+    id:'bocca-soulmate', photo:'Fotos/Bocca/soulmate.jpg', bg:'#3d1f0a', region:'Zuid-Amerika', icon:'🫘',
+    brand:'Bocca Coffee', brandInitial:'B', brandColor:'#c0392b',
+    brandCity:'Amsterdam', brandYear:2001, brandScore:4.6, brandReviews:623,
+    name:'Soulmate',
+    flag:'🇧🇷', country:'Brazilië', region_full:'Minas Gerais',
+    processing:'Natural', roastLevel:2, roastLabel:'Medium',
+    sca:86.0, variety:'Yellow Bourbon / Mundo Novo',
+    farm:'Fazenda Passeio', altitude:'1.100–1.300m', harvest:'Juni–September 2024',
+    brewing:['☕ Espresso','🫖 Filter'],
+    flavors:['🍫 Pure chocolade','🥜 Nootachtig','🍬 Karamel'],
+    certs:['☀️ Direct Trade'],
+    tags:['🏆 Bestseller'],
+    rating:4.6, reviews:287,
+    roastDate:'2 werkdagen geleden',
+    desc:'Soulmate is een single origin Braziliaanse koffie van Fazenda Passeio — een boerderij die al meer dan drie generaties in familiebezit is. Rijk en romig met tonen van pure chocolade en een zachte, nootachtige nasmaak.\n\nGeroosterd door Bocca Coffee in Amsterdam.',
+    prices: {250:10.50, 500:19.50, 1000:36.00},
+  },
+  'bocca-ethiopia': {
+    id:'bocca-ethiopia', photo:'Fotos/Bocca/ethiopia.jpg', bg:'#C9724A', region:'Oost-Afrika', icon:'🌺',
+    brand:'Bocca Coffee', brandInitial:'B', brandColor:'#c0392b',
+    brandCity:'Amsterdam', brandYear:2001, brandScore:4.6, brandReviews:623,
+    name:'Ethiopia',
+    flag:'🇪🇹', country:'Ethiopië', region_full:'Yirgacheffe & Sidama',
+    processing:'Natural', roastLevel:2, roastLabel:'Light-Medium',
+    sca:88.0, variety:'Heirloom',
+    farm:'Diverse washing stations', altitude:'1.700–2.200m', harvest:'Oktober–December 2024',
+    brewing:['🫖 Filter','☕ Espresso'],
+    flavors:['🍋 Citrus','🌸 Bloemig','🍑 Steenfruit'],
+    certs:['🌱 Biologisch','☀️ Direct Trade'],
+    tags:['🌱 BIO'],
+    rating:4.8, reviews:198,
+    roastDate:'1 werkdag geleden',
+    desc:'Ethiopia is Bocca\'s ode aan het geboorteland van koffie. Deze organische single origin uit Yirgacheffe en Sidama staat bekend om zijn uitgesproken fruitigheid en bloemige elegantie — een koffie die telkens nieuwe nuances onthult.\n\nGeroosterd door Bocca Coffee in Amsterdam.',
+    prices: {250:11.20, 500:20.50, 1000:38.00},
+  },
 };
 
 let activeProduct = null;
@@ -2569,14 +2625,14 @@ document.querySelectorAll('.rvf-btn').forEach(b=>b.addEventListener('click',func
 }));
 
 // ── Brand filter & dynamic product grid ──────────────────────────────────
-const BRAND_ORDER = ['Hoeksche Branders', 'Giraffe Coffee', 'Belgian Blenders'];
+const BRAND_ORDER = ['Hoeksche Branders', 'Giraffe Coffee', 'Belgian Blenders', 'Bocca Coffee'];
 const REGION_COLORS = {
   'Oost-Afrika':'#C9724A','Centraal-Afrika':'#C9A84C','Arabisch/Azië':'#9B9BC9',
   'Centraal-Amerika':'#6BAA78','Zuid-Amerika':'#A0744E','Pacific':'#7ABFBF',
   'Blend':'#8A9BA8','Gelimiteerd':'#6B3A2A','Decaf':'#8A9BA8',
 };
 const LIGHT_REGIONS = ['Centraal-Amerika'];
-const DEFAULT_BRANDS = ['Hoeksche Branders', 'Giraffe Coffee', 'Belgian Blenders'];
+const DEFAULT_BRANDS = ['Hoeksche Branders', 'Giraffe Coffee', 'Belgian Blenders', 'Bocca Coffee'];
 let activeBrands = new Set(DEFAULT_BRANDS);
 
 function ratingStars(r) {
