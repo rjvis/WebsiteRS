@@ -2281,11 +2281,11 @@ function renderDetail(p, size) {
   const dpPhotoBg = dpBB ? '#ffffff' : p.bg;
   const dpPhotoBorder = dpBB ? ';box-shadow:inset 0 0 0 1px #1a3a1a' : '';
   const dpImgStyle = dpBB
-    ? 'width:100%;height:100%;object-fit:contain;display:block;padding:8%'
+    ? 'height:100%;width:auto;max-width:100%;object-fit:contain;display:block'
     : 'width:100%;height:100%;object-fit:cover;display:block';
   document.getElementById('dp-inner').innerHTML = `
     <div class="dp-photo" style="background:${dpPhotoBg}${dpPhotoBorder}">
-      <div class="dp-photo-inner" style="${dpBB ? 'padding:0' : ''}">
+      <div class="dp-photo-inner" style="${dpBB ? 'padding:0 12%;display:flex;align-items:center;justify-content:center' : ''}">
         ${p.photo
           ? `<img src="${p.photo}" style="${dpImgStyle}">`
           : `<div class="dp-bag">${p.icon}</div><div class="dp-label"><div class="dp-label-brand">${p.brand}</div><div class="dp-label-name">${p.name}</div></div>`
