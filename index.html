@@ -83,7 +83,7 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
   padding:10px 13px;border-bottom:2px solid transparent;transition:.18s;
   white-space:nowrap;display:flex;align-items:center;gap:5px}
 .cat-item:hover{color:#fff;border-bottom-color:rgba(255,255,255,.25)}
-.cat-item.active{color:#fff;border-bottom-color:var(--gold)}
+.cat-item.active{color:#fff;border-bottom-color:transparent}
 
 /* ── HERO ── */
 .hero{position:relative;min-height:480px;display:flex;align-items:flex-start;overflow:hidden;
@@ -812,7 +812,7 @@ section{padding:36px 0}
     </div>
     <div class="nav-actions">
       <button class="btn-nav btn-nav-ghost" id="cartBtn">
-        🛒 Winkelwagen <span class="badge" id="cartCount">2</span>
+        🛒 Winkelwagen <span class="badge" id="cartCount">4</span>
       </button>
       <button class="btn-nav btn-nav-cta">Inloggen</button>
     </div>
@@ -834,7 +834,7 @@ section{padding:36px 0}
   <a href="#" class="nav-link" onclick="closeMobileMenu()">📦 Abonnement</a>
   <div class="nav-mobile-actions">
     <button class="btn-nav btn-nav-ghost" onclick="closeMobileMenu();document.getElementById('cartBtn').click()">
-      🛒 Winkelwagen <span class="badge">2</span>
+      🛒 Winkelwagen <span class="badge">4</span>
     </button>
     <button class="btn-nav btn-nav-cta" onclick="closeMobileMenu()">Inloggen</button>
   </div>
@@ -1830,39 +1830,77 @@ section{padding:36px 0}
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cd-hdr">
-    <div class="cd-title">🛒 Winkelwagen <span style="font-size:13px;font-weight:400;color:var(--muted)">(2 producten)</span></div>
+    <div class="cd-title">🛒 Winkelwagen <span style="font-size:13px;font-weight:400;color:var(--muted)">(4 producten)</span></div>
     <div class="cd-close" onclick="closeCart()">✕</div>
   </div>
   <div class="cd-items">
     <div class="cd-item">
-      <div class="cd-img" style="background:#C9724A">☕</div>
-      <div class="cd-info">
-        <div class="cd-name">Yirgacheffe Natural G1</div>
-        <div class="cd-brand">Friedhats Coffee · 250g</div>
-        <div class="cd-fresh">🟢 Vers geroosterd · 3 dg oud</div>
-        <div class="cd-controls">
-          <div class="qty-btn" onclick="updateQty(this,-1)">−</div>
-          <div class="qty-val">1</div>
-          <div class="qty-btn" onclick="updateQty(this,1)">+</div>
-          <span style="font-size:11px;color:var(--muted);margin-left:4px">× €17,50</span>
-        </div>
+      <div class="cd-img" style="background:#3d1f0a;padding:0;overflow:hidden">
+        <img src="Fotos/HoekscheBranders/capricornio.jpg" alt="Capricornio" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
-      <div class="cd-price">€17,50</div>
-    </div>
-    <div class="cd-item">
-      <div class="cd-img" style="background:#A0744E">🫘</div>
       <div class="cd-info">
-        <div class="cd-name">Colombia Huila Washed</div>
-        <div class="cd-brand">Bocca Coffee · 500g</div>
+        <div class="cd-name">Capricornio</div>
+        <div class="cd-brand">Hoeksche Branders · 250g</div>
         <div class="cd-fresh">🟢 Vers geroosterd · 2 dg oud</div>
         <div class="cd-controls">
           <div class="qty-btn" onclick="updateQty(this,-1)">−</div>
           <div class="qty-val">1</div>
           <div class="qty-btn" onclick="updateQty(this,1)">+</div>
-          <span style="font-size:11px;color:var(--muted);margin-left:4px">× €15,50</span>
+          <span style="font-size:11px;color:var(--muted);margin-left:4px">× €14,50</span>
         </div>
       </div>
-      <div class="cd-price">€15,50</div>
+      <div class="cd-price">€14,50</div>
+    </div>
+    <div class="cd-item">
+      <div class="cd-img" style="background:#1e2e10;padding:0;overflow:hidden">
+        <img src="Fotos/Giraffe/organicblend_1.jpg" alt="Organic Blend" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <div class="cd-info">
+        <div class="cd-name">Organic Blend</div>
+        <div class="cd-brand">Giraffe Coffee · 250g</div>
+        <div class="cd-fresh">🟢 Vers geroosterd · 1 dg oud</div>
+        <div class="cd-controls">
+          <div class="qty-btn" onclick="updateQty(this,-1)">−</div>
+          <div class="qty-val">1</div>
+          <div class="qty-btn" onclick="updateQty(this,1)">+</div>
+          <span style="font-size:11px;color:var(--muted);margin-left:4px">× €14,00</span>
+        </div>
+      </div>
+      <div class="cd-price">€14,00</div>
+    </div>
+    <div class="cd-item">
+      <div class="cd-img" style="background:#1e2a38;padding:5%;overflow:hidden;box-sizing:border-box">
+        <img src="Fotos/BelgianBlenders/royal.jpg" alt="Royal" style="width:100%;height:100%;object-fit:contain;display:block">
+      </div>
+      <div class="cd-info">
+        <div class="cd-name">Royal</div>
+        <div class="cd-brand">Belgian Blenders · 250g</div>
+        <div class="cd-fresh">🟢 Vers geroosterd · 3 dg oud</div>
+        <div class="cd-controls">
+          <div class="qty-btn" onclick="updateQty(this,-1)">−</div>
+          <div class="qty-val">1</div>
+          <div class="qty-btn" onclick="updateQty(this,1)">+</div>
+          <span style="font-size:11px;color:var(--muted);margin-left:4px">× €14,50</span>
+        </div>
+      </div>
+      <div class="cd-price">€14,50</div>
+    </div>
+    <div class="cd-item">
+      <div class="cd-img" style="background:#2a1a08;padding:0;overflow:hidden">
+        <img src="Fotos/Bocca/bocca_gusto.jpg" alt="Gusto" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <div class="cd-info">
+        <div class="cd-name">Gusto</div>
+        <div class="cd-brand">Bocca Coffee · 250g</div>
+        <div class="cd-fresh">🟢 Vers geroosterd · 1 dg oud</div>
+        <div class="cd-controls">
+          <div class="qty-btn" onclick="updateQty(this,-1)">−</div>
+          <div class="qty-val">1</div>
+          <div class="qty-btn" onclick="updateQty(this,1)">+</div>
+          <span style="font-size:11px;color:var(--muted);margin-left:4px">× €11,20</span>
+        </div>
+      </div>
+      <div class="cd-price">€11,20</div>
     </div>
     <div style="background:var(--g50);border:1px dashed #81c784;border-radius:9px;padding:11px 13px;font-size:12.5px;color:var(--g700)">
       🎁 Nog <strong>€7,00</strong> tot gratis verzending!
@@ -1872,9 +1910,9 @@ section{padding:36px 0}
     </div>
   </div>
   <div class="cd-footer">
-    <div class="cd-row"><span>Subtotaal</span><span>€33,00</span></div>
+    <div class="cd-row"><span>Subtotaal</span><span>€54,20</span></div>
     <div class="cd-row"><span>Verzending</span><span style="color:var(--g600)">Gratis ✓</span></div>
-    <div class="cd-total"><span>Totaal</span><span>€33,00</span></div>
+    <div class="cd-total"><span>Totaal</span><span>€54,20</span></div>
     <button class="btn-checkout">🔒 Afrekenen →</button>
     <div class="cd-pay-note">💳 iDEAL · Creditcard · PayPal · Klarna</div>
   </div>
